@@ -1,3 +1,65 @@
+# Giphy
+
+## 1. Description
+Giphy is a single-page application that allows users to view trending GIFs, search for GIFs, add GIFs to their favorites section, remove GIFs from favorites, view detailed information about GIFs (including title, username, upload date, and views), upload their own GIFs, and view their uploaded GIFs.
+
+Developed by Nia, Radoslav & Gergana.
+
+## 2. Features
+
+- View Trending GIFs: Users can see the current trending GIFs on the website.
+- Search GIFs: Users can search for GIFs using specific criteria.
+- Add GIF to Favorites: Users can mark GIFs as their favorites and save them for later viewing.
+- Remove GIF from Favorites: Users can remove GIFs from their favorites section.
+- View GIF Details: Users can see detailed information about a GIF, including its title, username, upload date, and views.
+- Upload GIF: Users can upload their own GIFs to the website.
+- View Uploaded GIFs: Users can see the GIFs they have uploaded.
+- Additional Features: Implement any additional features as desired.
+
+## 3. Installation and Setup
+- Clone the repository: `git clone <repository_url>`
+- Open the project in a code editor.
+- Customize the code as needed.
+- Open the `index.html` file in a web browser to view the application.
+
+## 4. Usage
+- Explore the homepage to see a GIF carousel and discover new GIFs.
+- Visit the Trending page to view the current trending GIFs.
+- Use the search functionality to find GIFs based on specific criteria.
+- Add your favorite GIFs to the Favorites section for easy access.
+- Remove GIFs from Favorites if desired.
+- Click on a GIF to view its details, including title, username, upload date, and views.
+- Upload your own GIFs using the Upload page.
+- View the GIFs you have uploaded in the Uploaded section.
+
+## 5. Technologies Used
+- HTML
+- CSS
+- JavaScript
+- Giphy API (to fetch trending GIFs, search GIFs, and upload GIFs)
+
+## 6. Contributing
+Contributions to the project are welcome. Feel free to fork the repository, make improvements, and submit a pull request.
+
+## 7. License
+This project is licensed under the [MIT License](LICENSE).
+
+## 8. Acknowledgements
+- Giphy for providing the API for fetching trending GIFs, searching GIFs, and uploading GIFs.
+- Bootstrap or any other libraries used for styling and UI components.
+- Any other acknowledgements or credits as necessary.
+
+
+
+
+
+
+
+
+
+
+// This is generated automatically by GitLab
+
 # Web Giphy Project
 
 
