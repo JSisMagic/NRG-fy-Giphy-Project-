@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giphy</title>
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Giphy</h1>
+  </header>
+
+  <main>
+    <section id="trending-gifs">
+      <h2>Trending Gifs</h2>
+      <div id="trending-gifs-container"></div>
+      <button id="load-more-trending">Load More</button>
+    </section>
+
+    <section id="search-gifs">
+      <h2>Search Gifs</h2>
+      <form id="search-form">
+        <input type="text" id="search-input" placeholder="Enter search query">
+        <button type="submit">Search</button>
+      </form>
+      <div id="search-results-container"></div>
+      <button id="load-more-search">Load More</button>
+    </section>
+
+    <section id="gif-details">
+      <h2>Gif Details</h2>
+      <div id="gif-details-container">
+        <h3 id="gif-title"></h3>
+        <p id="gif-username"></p>
+        <p id="gif-upload-date"></p>
+        <p id="gif-views"></p>
+        <button id="go-back">Go Back</button>
+      </div>
+    </section>
+
+    <section id="upload-gif">
+      <h2>Upload Gif</h2>
+      <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" id="gif-file" accept=".gif">
+        <button type="submit">Upload</button>
+      </form>
+      <div id="uploaded-gifs-container"></div>
+    </section>
+
+    <section id="favorite-gifs">
+      <h2>Favorite Gifs</h2>
+      <div id="favorite-gifs-container"></div>
+    </section>
+
+    <section id="random-gif">
+      <h2>Random Gif</h2>
+      <div id="random-gif-container"></div>
+      <button id="generate-random">Generate Random Gif</button>
+    </section>
+
+    <section id="paging">
+      <h2>Paging</h2>
+      <div id="paging-container"></div>
+      <button id="previous-page">Previous Page</button>
+      <button id="next-page">Next Page</button>
+    </section>
+
+    <section id="notifications">
+      <h2>Notifications</h2>
+      <div id="notifications-container"></div>
+    </section>
+
+    <section id="additional-features">
+      <h2>Additional Features</h2>
+      <!-- We will add additional features here -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Giphy. All rights reserved.</p>
+  </footer>
+
+  <script src="scripts/main.js" type="module"></script>
+</body>
+
+</html>
