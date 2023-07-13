@@ -1,4 +1,4 @@
-import { CONTAINER_SELECTOR, HOME, FAVORITES, ABOUT, CATEGORIES } from '../common/constants.js';
+import { CONTAINER_SELECTOR, HOME, FAVORITES, ABOUT } from '../common/constants.js';
 import { toCategoriesView } from '../views/category-view.js';
 import { toHomeView } from '../views/home-view.js';
 import { toMoviesFromCategoryView, toSingleMovieView } from '../views/movie-views.js';
@@ -13,21 +13,21 @@ export const loadPage = (page = '') => {
 
   switch (page) {
 
-    case HOME:
-      setActiveNav(HOME);
-      return renderHome();
-    case CATEGORIES:
-      setActiveNav(CATEGORIES);
-      return renderCategories();
-    case FAVORITES:
-      setActiveNav(FAVORITES);
-      return renderFavorites();
-    case ABOUT:
-      setActiveNav(ABOUT);
-      return renderAbout();
+  case HOME:
+    setActiveNav(HOME);
+    return renderHome();
+  // case CATEGORIES:
+  //   setActiveNav(CATEGORIES);
+  //   return renderCategories();
+  case FAVORITES:
+    setActiveNav(FAVORITES);
+    return renderFavorites();
+  case ABOUT:
+    setActiveNav(ABOUT);
+    return renderAbout();
 
     /* if the app supports error logging, use default to log mapping errors */
-    default: return null;
+  default: return null;
   }
 
 };
@@ -51,12 +51,12 @@ const renderHome = () => {
   q(CONTAINER_SELECTOR).innerHTML = toHomeView();
 };
 
-const renderCategories = () => {
+// const renderCategories = () => {
 
-  const categories = loadCategories();
+//   const categories = loadCategories();
 
-  q(CONTAINER_SELECTOR).innerHTML = toCategoriesView(categories);
-};
+//   q(CONTAINER_SELECTOR).innerHTML = toCategoriesView(categories);
+// };
 
 const renderFavorites = () => {
   const movies = loadFavorites();
@@ -65,5 +65,4 @@ const renderFavorites = () => {
 
 const renderAbout = () => {
   q(CONTAINER_SELECTOR).innerHTML = toAboutView();
-  // Viara
 };

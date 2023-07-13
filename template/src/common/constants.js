@@ -1,6 +1,6 @@
 export const HOME = 'home';
 
-export const CATEGORIES = 'categories';
+// export const CATEGORIES = 'categories';
 
 export const FAVORITES = 'favorites';
 
