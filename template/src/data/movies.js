@@ -34,19 +34,19 @@ export const getMoviesFullInfo = (categoryId = null) => {
 
 export const getMovieById = (movieId = 0) => movies.find(m => m.id === movieId);
 
-// export const trendingGifs = async () => {
+export const trendingGifs = async () => {
 
-//   try {
-//     const url = `https://api.giphy.com/v1/gifs/search?api_key=8sqJpEYE537qoAIdMmET7e54DABNO8vP&qe826c9fc5c929e0d6c6d423841a282aa`;
-//     const results = await fetch(url);
-//     const resultsObject = await results.json();
+  try {
+    const url = `https://api.giphy.com/v1/gifs/trending?api_key=8sqJpEYE537qoAIdMmET7e54DABNO8vP`;
+    const results = await fetch(url);
+    const resultsObject = await results.json();
 
-//     return resultsObject;
+    return resultsObject.data;
 
-//   } catch (e) {
-//     console.error(e);
-//   }
-// };
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 export const searchGifs = async (searchTerm = '') => {
 

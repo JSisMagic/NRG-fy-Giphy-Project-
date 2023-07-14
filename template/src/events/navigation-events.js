@@ -3,22 +3,20 @@ import { toCategoriesView } from '../views/category-view.js';
 import { toHomeView } from '../views/home-view.js';
 import { toMoviesFromCategoryView, toSingleMovieView } from '../views/movie-views.js';
 import { q, setActiveNav } from './helpers.js';
-import { loadCategories, loadCategory, loadFavorites, loadMovies } from '../requests/request-service.js';
+import { loadTrending, loadCategory, loadFavorites, loadMovies } from '../requests/request-service.js';
 import { getMovieById } from '../data/movies.js';
 import { toAboutView } from '../views/about-view.js';
 import { toFavoritesView } from '../views/favorites-view.js';
 
 // public API
-export const loadPage = (page = '') => {
+export const loadPage = async (page = '') => {
 
   switch (page) {
 
   case HOME:
     setActiveNav(HOME);
-    return renderHome();
-  // case CATEGORIES:
-  //   setActiveNav(CATEGORIES);
-  //   return renderCategories();
+    const gifsObj = await loadTrending();
+    return renderHome(gifsObj);
   case FAVORITES:
     setActiveNav(FAVORITES);
     return renderFavorites();
@@ -47,16 +45,9 @@ export const renderCategory = (categoryId = null) => {
 
 // private functions
 
-const renderHome = () => {
-  q(CONTAINER_SELECTOR).innerHTML = toHomeView();
+const renderHome = (obj) => {
+  q(CONTAINER_SELECTOR).innerHTML = toHomeView(obj);
 };
-
-// const renderCategories = () => {
-
-//   const categories = loadCategories();
-
-//   q(CONTAINER_SELECTOR).innerHTML = toCategoriesView(categories);
-// };
 
 const renderFavorites = () => {
   const movies = loadFavorites();

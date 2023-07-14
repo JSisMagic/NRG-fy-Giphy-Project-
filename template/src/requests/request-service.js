@@ -1,4 +1,4 @@
-import { getCategories, getMoviesGeneralInfo, getMovieById, getCategory, searchGifs } from '../data/movies.js';
+import { getCategories, getMoviesGeneralInfo, getMovieById, getCategory, searchGifs, trendingGifs } from '../data/movies.js';
 import { getFavorites } from '../data/favorites.js';
 
 export const loadCategories = () => {
@@ -30,6 +30,16 @@ export const loadSearchGifs = async (searchTerm = '') => {
   try {
     const foundGifsObj = searchGifs(searchTerm);
     return foundGifsObj;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const loadTrending = async () => {
+
+  try {
+    const trendingGifsObj = await trendingGifs();
+    return trendingGifsObj;
   } catch (e) {
     console.error(e);
   }

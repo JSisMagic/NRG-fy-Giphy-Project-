@@ -4,15 +4,15 @@ import { q } from './events/helpers.js';
 import { loadPage, renderCategory, renderMovieDetails } from './events/navigation-events.js';
 import { renderSearchItems } from './events/search-events.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
   // add global listener
-  document.addEventListener('click', event => {
+  document.addEventListener('click', async event => {
 
     // nav events
     if (event.target.classList.contains('nav-link')) {
 
-      loadPage(event.target.getAttribute('data-page'));
+      await loadPage(event.target.getAttribute('data-page'));
     }
 
     // show category events
@@ -37,6 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderSearchItems(event.target.value);
   });
 
-  loadPage(HOME);
+  await loadPage(HOME);
 
 });
