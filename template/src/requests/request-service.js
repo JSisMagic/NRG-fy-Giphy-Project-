@@ -10,7 +10,7 @@ export const loadCategory = (id = null) => {
   const category = getCategory(id);
 
   return category;
-}
+};
 
 export const loadMovies = (categoryId = null) => {
 
@@ -27,13 +27,13 @@ export const loadSingleMovie = (id) => {
 
 export const loadSearchMovies = (searchTerm = '') => {
   const foundMovie = searchMovies(searchTerm);
-  
+
   return foundMovie;
 };
 
 
 export const loadFavorites = () => {
   const moviesIds = getFavorites();
-  const movies = moviesIds.map(id => loadSingleMovie(id))
+  const movies = moviesIds.map(id => loadSingleMovie(id));
   return movies;
 };
