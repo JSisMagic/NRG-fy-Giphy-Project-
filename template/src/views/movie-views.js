@@ -18,9 +18,9 @@ export const toSingleMovieView = (movie) => `
 //  <span id="img-block"><a href="#" class="details-link" data-movie="${movie.id}">View details</a></span>
 //  ${renderFavoriteStatus(movie.id)}
 export const toMovieSimple = (gif) => `
-<div id="movie-simple">
-<img src="${gif.images.fixed_height.url}" alt="gif-small">
-<br>
+<div class="movie-simple">
+ <img class="image-display" src="${gif.images.fixed_height.url}" alt="${gif.title}" data-gif="${gif.id}">
+ <br>
 </div>
 `;
 
