@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // show movie events
-    if (event.target.classList.contains('details-link')) {
-      renderMovieDetails(+event.target.getAttribute('data-movie'));
+    if (event.target.classList.contains('image-display')) {
+      renderMovieDetails(+event.target.getAttribute('data-gif'));
     }
 
     // toggle favorite event
