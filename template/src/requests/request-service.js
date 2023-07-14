@@ -1,4 +1,4 @@
-import { getCategories, getMoviesGeneralInfo, getMovieById, getCategory, searchMovies } from '../data/movies.js';
+import { getCategories, getMoviesGeneralInfo, getMovieById, getCategory, searchGifs } from '../data/movies.js';
 import { getFavorites } from '../data/favorites.js';
 
 export const loadCategories = () => {
@@ -25,12 +25,15 @@ export const loadSingleMovie = (id) => {
   return singleMovie;
 };
 
-export const loadSearchMovies = (searchTerm = '') => {
-  const foundMovie = searchMovies(searchTerm);
+export const loadSearchGifs = async (searchTerm = '') => {
 
-  return foundMovie;
+  try {
+    const foundGifsObj = searchGifs(searchTerm);
+    return foundGifsObj;
+  } catch (e) {
+    console.error(e);
+  }
 };
-
 
 export const loadFavorites = () => {
   const moviesIds = getFavorites();

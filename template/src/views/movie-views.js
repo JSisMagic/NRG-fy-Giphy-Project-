@@ -13,13 +13,14 @@ export const toSingleMovieView = (movie) => `
 <div>${toMovieDetailed(movie)}</div>
 `;
 
-export const toMovieSimple = (movie) => `
+/* <h2>${movie.title}</h2>
+ <p>${movie.year}</p> */
+//  <span id="img-block"><a href="#" class="details-link" data-movie="${movie.id}">View details</a></span>
+//  ${renderFavoriteStatus(movie.id)}
+export const toMovieSimple = (gif) => `
 <div id="movie-simple">
- <h2>${movie.title}</h2>
- <p>${movie.year}</p>
- <img src="${movie.poster}" alt="movie-poster" width="200" height="auto">
- <br><span id="img-block"><a href="#" class="details-link" data-movie="${movie.id}">View details</a></span>
- ${renderFavoriteStatus(movie.id)}
+<img src="${gif.images.fixed_height.url}" alt="gif-small">
+<br>
 </div>
 `;
 
