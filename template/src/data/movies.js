@@ -34,9 +34,22 @@ export const getMoviesFullInfo = (categoryId = null) => {
 
 export const getMovieById = (movieId = 0) => movies.find(m => m.id === movieId);
 
-export const searchMovies = (title = '') => title
-  ? movies.filter(m => m.title.toLowerCase().includes(title.toLowerCase()))
-  : movies;
+export const searchGifs = async (searchTerm = '') => {
+
+  try {
+    const url = `https://api.giphy.com/v1/gifs/search?api_key=8sqJpEYE537qoAIdMmET7e54DABNO8vP&q=${searchTerm}&limit=25&offset=0&rating=g`;
+    const results = await fetch(url);
+    const resultsObject = await results.json();
+
+    return resultsObject;
+    
+  } catch (e) {
+    console.error(e);
+  }
+}
+// title
+//   ? movies.filter(m => m.title.toLowerCase().includes(title.toLowerCase()))
+//   : movies;
 
 export const getCategory = (categoryId = null) => {
   return categories.find(c => c.id === categoryId) || null;
