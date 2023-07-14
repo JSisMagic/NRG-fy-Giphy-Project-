@@ -2,15 +2,15 @@ import { movies, categories } from './movies-data.js';
 
 const findCategory = (categoryId) => {
   return categories.find(c => c.id === categoryId) || { id: -1, name: '' };
-}
+};
 
 // public API
 
 export const getMoviesGeneralInfo = (categoryId = null) => {
 
-  const moviesFilter = categoryId
-    ? m => m.genre === findCategory(categoryId).name
-    : () => true;
+  const moviesFilter = categoryId ?
+    m => m.genre === findCategory(categoryId).name :
+    () => true;
 
   return movies
     .filter(moviesFilter)
@@ -34,6 +34,20 @@ export const getMoviesFullInfo = (categoryId = null) => {
 
 export const getMovieById = (movieId = 0) => movies.find(m => m.id === movieId);
 
+// export const trendingGifs = async () => {
+
+//   try {
+//     const url = `https://api.giphy.com/v1/gifs/search?api_key=8sqJpEYE537qoAIdMmET7e54DABNO8vP&qe826c9fc5c929e0d6c6d423841a282aa`;
+//     const results = await fetch(url);
+//     const resultsObject = await results.json();
+
+//     return resultsObject;
+
+//   } catch (e) {
+//     console.error(e);
+//   }
+// };
+
 export const searchGifs = async (searchTerm = '') => {
 
   try {
@@ -47,6 +61,7 @@ export const searchGifs = async (searchTerm = '') => {
     console.error(e);
   }
 };
+
 // title
 //   ? movies.filter(m => m.title.toLowerCase().includes(title.toLowerCase()))
 //   : movies;
