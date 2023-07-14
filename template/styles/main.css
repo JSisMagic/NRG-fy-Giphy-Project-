@@ -135,16 +135,20 @@ span.favorite:hover {
 }
 
 
-#movie-simple {
+.movie-simple {
   display: block;
   float: left;
   align-items: center;
-  width: 250px;
-  height: 500px;
+  width: min-content;
+  height: min-content;
   background-color: #0e0f10;
   text-align: center;
-  padding: 5px 20px;
   margin: 10px;
+}
+
+.image-display  {
+  border: 0px;
+  border-radius: 6px;
 }
 
 #movie-simple h2 {
@@ -156,9 +160,9 @@ span.favorite:hover {
 
 
 #movies .content {
-  display:flex; 
+  display: flex; 
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: justify;
 }
 
 .headline {
