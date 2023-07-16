@@ -1,4 +1,4 @@
-import { keyGergana } from '../common/constants.js';
+import { keyGergana, SEARCH_LIMIT } from '../common/constants.js';
 import { movies, categories } from './movies-data.js';
 
 const findCategory = (categoryId) => {
@@ -44,9 +44,9 @@ export const trendingGifs = async () => {
   }
 };
 
-export const searchGifs = async (searchTerm = '') => {
+export const searchGifs = async (searchTerm = '', offset = 0) => {
   try {
-    const url = `https://api.giphy.com/v1/gifs/search?api_key=8sqJpEYE537qoAIdMmET7e54DABNO8vP&q=${searchTerm}&limit=25&offset=0&rating=g`;
+    const url = `https://api.giphy.com/v1/gifs/search?api_key=8sqJpEYE537qoAIdMmET7e54DABNO8vP&q=${searchTerm}&limit=${SEARCH_LIMIT}&offset=${offset}&rating=g`;
     const results = await fetch(url);
     const resultsObject = await results.json();
 

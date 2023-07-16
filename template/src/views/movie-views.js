@@ -4,7 +4,7 @@ export const toMoviesFromCategoryView = (category, movies) => `
 <div id="movies">
   <h1>${category.name} movies:</h1>
   <div class="content">
-    ${movies.map(toMovieSimple).join('\n')}
+    ${movies.map(toGifSimple).join('\n')}
   </div>
 </div>
 `;
@@ -17,7 +17,7 @@ export const toSingleMovieView = (movie) => `
  <p>${movie.year}</p> */
 //  <span id="img-block"><a href="#" class="details-link" data-movie="${movie.id}">View details</a></span>
 //  ${renderFavoriteStatus(movie.id)}
-export const toMovieSimple = (gif) => `
+export const toGifSimple = (gif) => `
 <div class="movie-simple">
  <img class="image-display" src="${gif.images.fixed_height.url}" alt="${gif.title}" data-gif="${gif.id}">
  <br>

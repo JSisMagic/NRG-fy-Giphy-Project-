@@ -1,10 +1,17 @@
-import { toMovieSimple } from './movie-views.js';
+import { CONTAINER_SELECTOR } from '../common/constants.js';
+import { q } from '../events/helpers.js';
 
-export const toSearchView = (gifsObj, searchTerm) => `
-<div id="movies">
-  <h1>Gifs found for "${searchTerm}":</h1>
-  <div class="content">
-    ${gifsObj.data.map(toMovieSimple).join('\n') || '<p>Add some movies to favorites to see them here.</p>'}
-  </div>
-</div>
-`;
+export const toSearchView = (gifsObj) => {
+
+  const container = q(CONTAINER_SELECTOR);
+ 
+  gifsObj.data.forEach((e) => {
+    const div = document.createElement('div');
+    div.classList.add('movie-simple');
+    const img = document.createElement('img');
+    img.src = `${e.images.fixed_height.url}`;
+    img.classList.add('image-display');
+    div.appendChild(img);
+    container.appendChild(div);
+  });
+};
