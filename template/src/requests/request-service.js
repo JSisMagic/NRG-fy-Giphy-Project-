@@ -31,9 +31,10 @@ export const loadSingleMovie = (id) => {
   return singleMovie;
 };
 
-export const loadSearchGifs = async (searchTerm = '') => {
+export const loadSearchGifs = async (searchTerm = '', offset = 0) => {
+
   try {
-    const foundGifsObj = searchGifs(searchTerm);
+    const foundGifsObj = searchGifs(searchTerm, offset);
     return foundGifsObj;
   } catch (e) {
     console.error(e);
