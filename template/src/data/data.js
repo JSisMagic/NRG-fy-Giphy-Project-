@@ -56,6 +56,18 @@ export const searchGifs = async (searchTerm = '') => {
   }
 };
 
+export const randomGif = async () => {
+  try {
+    const url = `https://api.giphy.com/v1/randomid?api_key=8sqJpEYE537qoAIdMmET7e54DABNO8vP`;
+    const results = await fetch(url);
+    const resultsObject = await results.json();
+
+    return resultsObject.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 // title
 //   ? movies.filter(m => m.title.toLowerCase().includes(title.toLowerCase()))
 //   : movies;

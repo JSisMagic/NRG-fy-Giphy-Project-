@@ -16,6 +16,7 @@ import {
   loadCategory,
   loadFavorites,
   loadMovies,
+  loadRandomGif,
 } from '../requests/request-service.js';
 import { getMovieById } from '../data/data.js';
 import { toAboutView } from '../views/about-view.js';
@@ -24,20 +25,21 @@ import { toFavoritesView } from '../views/favorites-view.js';
 // public API
 export const loadPage = async (page = '') => {
   switch (page) {
-    case HOME:
-      setActiveNav(HOME);
-      const gifsObj = await loadTrending();
-      return renderHome(gifsObj);
-    case FAVORITES:
-      setActiveNav(FAVORITES);
-      return renderFavorites();
-    case ABOUT:
-      setActiveNav(ABOUT);
-      return renderAbout();
+  case HOME:
+    setActiveNav(HOME);
+    const gifsObj = await loadTrending();
+    return renderHome(gifsObj);
+  case FAVORITES:
+    setActiveNav(FAVORITES);
+    const randomGifObj = await loadRandomGif();
+    return renderFavorites(randomGifObj);
+  case ABOUT:
+    setActiveNav(ABOUT);
+    return renderAbout();
 
     /* if the app supports error logging, use default to log mapping errors */
-    default:
-      return null;
+  default:
+    return null;
   }
 };
 
@@ -59,10 +61,15 @@ const renderHome = (obj) => {
   q(CONTAINER_SELECTOR).innerHTML = toHomeView(obj);
 };
 
-const renderFavorites = () => {
-  const movies = loadFavorites();
-  q(CONTAINER_SELECTOR).innerHTML = '<p>favourites</p>';
+const renderFavorites = (randomGifObj) => {
+  // const likedGifs = loadFavorites();
+  q(CONTAINER_SELECTOR).innerHTML = toFavoritesView(randomGifObj);
 };
+
+// const renderFavorites = () => {
+//   const movies = loadFavorites();
+//   q(CONTAINER_SELECTOR).innerHTML = '<p>favourites</p>';
+// };
 
 const renderAbout = () => {
   q(CONTAINER_SELECTOR).innerHTML = toAboutView();
