@@ -1,4 +1,11 @@
-import { getCategories, getMoviesGeneralInfo, getMovieById, getCategory, searchGifs, trendingGifs } from '../data/movies.js';
+import {
+  getCategories,
+  getMoviesGeneralInfo,
+  getMovieById,
+  getCategory,
+  searchGifs,
+  trendingGifs,
+} from '../data/data.js';
 import { getFavorites } from '../data/favorites.js';
 
 export const loadCategories = () => {
@@ -13,7 +20,6 @@ export const loadCategory = (id = null) => {
 };
 
 export const loadMovies = (categoryId = null) => {
-
   const movies = getMoviesGeneralInfo(categoryId);
 
   return movies;
@@ -26,7 +32,6 @@ export const loadSingleMovie = (id) => {
 };
 
 export const loadSearchGifs = async (searchTerm = '') => {
-
   try {
     const foundGifsObj = searchGifs(searchTerm);
     return foundGifsObj;
@@ -36,7 +41,6 @@ export const loadSearchGifs = async (searchTerm = '') => {
 };
 
 export const loadTrending = async () => {
-
   try {
     const trendingGifsObj = await trendingGifs();
     return trendingGifsObj;
@@ -47,6 +51,6 @@ export const loadTrending = async () => {
 
 export const loadFavorites = () => {
   const moviesIds = getFavorites();
-  const movies = moviesIds.map(id => loadSingleMovie(id));
+  const movies = moviesIds.map((id) => loadSingleMovie(id));
   return movies;
 };
