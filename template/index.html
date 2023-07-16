@@ -1,49 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NRG-ify</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="./images/favicon.png" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NRG-ify</title>
-  <link rel="stylesheet" href="./styles/main.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="icon" type="image/png" href="./images/favicon.png">
-</head>
+  <body>
+    <div id="app">
+      <nav>
+        <a href="#" class="nav-link" data-page="home">NRG-ify</a>
+        <a href="#" class="nav-link" data-page="favorites">Favorites</a>
+        <form>
+          <button id="upload-button">Upload</button>
+          <input id="browse-button" style="display: none" type="file" />
+        </form>
 
-<body>
-  <div id="app">
-    <nav>
-      <a href="#" class="nav-link" data-page="home">NRG-ify</a>
-      <a href="#" class="nav-link" data-page="favorites">Favorites</a>
-      <a href="#" class="nav-link" data-page="upload">Upload</a>
-      <input id="search" type="text" placeholder="Search Gifs">
-      <a href="#" class="nav-link" data-page="about">About</a>
-    </nav>
-    <div id="container">
-      <!-- start placeholders -->
+        <input id="search" type="text" placeholder="Search Gifs" />
+        <a href="#" class="nav-link" data-page="about">About</a>
+      </nav>
+      <div id="container">
+        <!-- start placeholders -->
 
-      <!-- end placeholders -->
+        <!-- end placeholders -->
+      </div>
+      <footer class="footer-container">
+        <div>
+          <img src="./images/giphy_logo.png" alt="" srcset="" />
+          <p>
+            All information has been taken from
+            <a href="https://giphy.com/">GIPHY</a>
+          </p>
+        </div>
+        <div class="social-footer">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </footer>
     </div>
-    <footer class="footer-container">
-      <div>
-        <img src="./images/giphy_logo.png" alt="" srcset="">
-        <p>
-          All information has been taken from <a href="https://giphy.com/">GIPHY</a>
-        </p>
-      </div>
-      <div class="social-footer">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-      </div>
-    </footer>
-  </div>
 
-  <!-- app -->
-  <script src="./src/index.js" type="module"></script>
-  <!-- end app -->
-</body>
-
+    <!-- app -->
+    <script src="./index.js" type="module"></script>
+    <!-- end app -->
+  </body>
 </html>
