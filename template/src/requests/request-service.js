@@ -5,7 +5,6 @@ import {
   getCategory,
   searchGifs,
   trendingGifs,
-  randomGif,
 } from '../data/data.js';
 import { getFavorites } from '../data/favorites.js';
 
@@ -46,15 +45,6 @@ export const loadTrending = async () => {
   try {
     const trendingGifsObj = await trendingGifs();
     return trendingGifsObj;
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-export const loadRandomGif = async () => {
-  try {
-    const randomGifObj = await randomGif();
-    return randomGifObj;
   } catch (e) {
     console.error(e);
   }
