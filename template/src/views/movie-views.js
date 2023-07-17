@@ -20,6 +20,7 @@ export const toSingleMovieView = (movie) => `
 export const toGifSimple = (gif) => `
 <div class="movie-simple">
  <img class="image-display" src="${gif.images.fixed_height.url}" alt="${gif.title}" data-gif="${gif.id}">
+ ${renderFavoriteStatus(gif.id)}
  <br>
  <a href="#" class="view-button" data-gif="${gif.id}">View details</a>
 </div>

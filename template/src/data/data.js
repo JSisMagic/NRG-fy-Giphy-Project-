@@ -29,8 +29,17 @@ export const getMoviesFullInfo = (categoryId = null) => {
   return movies;
 };
 
-export const getMovieById = (movieId = 0) =>
-  movies.find((m) => m.id === movieId);
+export const getMovieById = async (gifId = '') => {
+  try {
+    const url = `https://api.giphy.com/v1/gifs/${gifId}?api_key=8sqJpEYE537qoAIdMmET7e54DABNO8vP&rating=g`;
+    const result = await fetch(url);
+    const resultObject = await result.json();
+
+    return resultObject.data;
+  } catch (e) {
+    console.error(e);
+  }
+}
 
 export const trendingGifs = async () => {
   try {

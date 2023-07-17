@@ -33,7 +33,9 @@ export const loadPage = async (page = '', id) => {
       return renderHome(gifsObj);
     case FAVORITES:
       setActiveNav(FAVORITES);
-      return renderFavorites();
+     const gifsFav = await loadFavorites();
+     const gifsFavObj = gifsFav.map(el => el.value);
+      return renderFavorites(gifsFavObj);
     case ABOUT:
       setActiveNav(ABOUT);
       return renderAbout();
@@ -67,9 +69,8 @@ const renderHome = (obj) => {
   q(CONTAINER_SELECTOR).innerHTML = toHomeView(obj);
 };
 
-const renderFavorites = () => {
-  const movies = loadFavorites();
-  q(CONTAINER_SELECTOR).innerHTML = '<p>favourites</p>';
+const renderFavorites = (obj) => {
+  q(CONTAINER_SELECTOR).innerHTML = toFavoritesView(obj);
 };
 
 const renderAbout = () => {

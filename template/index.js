@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // toggle favorite event
     if (event.target.classList.contains('favorite')) {
-      toggleFavoriteStatus(+event.target.getAttribute('data-movie-id'));
+      toggleFavoriteStatus(event.target.getAttribute('data-gif-id'));
     }
 
     if (event.target.classList.contains('view-button')) {
@@ -62,14 +62,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.searchTerm = event.target.value;
     const container = q(CONTAINER_SELECTOR);
     container.innerHTML = `<h1><span id="${SEARCH_RESULTS_TOTAL}"></span> results for "${window.searchTerm}"<h1>`;
-    //renderSearchItems(event.target.value, 0);
+    renderSearchItems(event.target.value, 0);
   });
 
   window.addEventListener('scroll', () => {
-    if (
-      window.scrollY + window.innerHeight >=
-      document.documentElement.scrollHeight
-    ) {
+
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight &&
+      document.getElementById('search-results-total')) {
       renderSearchItems(window.searchTerm, window.offset);
       window.gifLoading = true;
     }

@@ -25,8 +25,8 @@ export const loadMovies = (categoryId = null) => {
   return movies;
 };
 
-export const loadSingleMovie = (id) => {
-  const singleMovie = getMovieById(id);
+export const loadSingleGif = async (id) => {
+  const singleMovie = await getMovieById(id);
 
   return singleMovie;
 };
@@ -34,7 +34,7 @@ export const loadSingleMovie = (id) => {
 export const loadSearchGifs = async (searchTerm = '', offset = 0) => {
 
   try {
-    const foundGifsObj = searchGifs(searchTerm, offset);
+    const foundGifsObj = await searchGifs(searchTerm, offset);
     return foundGifsObj;
   } catch (e) {
     console.error(e);
@@ -50,8 +50,13 @@ export const loadTrending = async () => {
   }
 };
 
-export const loadFavorites = () => {
-  const moviesIds = getFavorites();
-  const movies = moviesIds.map((id) => loadSingleMovie(id));
-  return movies;
+export const loadFavorites = async () => {
+
+  try {
+    const gifIds = getFavorites();
+    return await Promise.allSettled(gifIds.map(async (id) => await loadSingleGif(id)));
+
+  } catch (e) {
+    console.error(e)
+  }
 };
