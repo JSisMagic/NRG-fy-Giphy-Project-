@@ -5,9 +5,11 @@ import {
   FAVOURITES,
   ABOUT,
   SEARCH_LIMIT,
+  EMPTY_HEART,
+  FULL_HEART,
 } from './constants.js';
-import { getTrendingGifs, getSearchGifs } from './data.js';
-import { simpleView, simpleViewFav } from './views/simple-view.js';
+import { getTrendingGifs, getSearchGifs, loadFavorites } from './data.js';
+import { simpleView } from './views/simple-view.js';
 import { homeView } from './views/home-view.js';
 import {
   favouritesView,
@@ -15,7 +17,7 @@ import {
 } from './views/favourites-view.js';
 import { searchView } from './views/search-view.js';
 import { toAboutView } from './views/about-view.js';
-import { manageFavourites } from './data.js';
+import { getFavorites, addFavorite, removeFavorite } from './local-storage.js';
 
 export const loadPage = async (page = '', searchTerm = '') => {
   switch (page) {
@@ -27,7 +29,8 @@ export const loadPage = async (page = '', searchTerm = '') => {
     return renderHome(trendingArr);
 
   case FAVOURITES:
-    const gifs = await manageFavourites.get();
+    const loadedGifs = await loadFavorites();
+    const gifs = loadedGifs.map((element) => element.value);
 
     setActiveNav(FAVOURITES);
     return renderFavourites(gifs);
@@ -59,13 +62,29 @@ function renderHome(trendingArr) {
   document.querySelector(CONTAINER).innerHTML = homeView(gifs);
 }
 
-export const renderFavourites = (data) => {
-  const gifs = data.map((gif) => simpleViewFav(gif)).join('\n');
 
-  if (gifs.length === 0) {
-    document.querySelector(CONTAINER).innerHTML = favouritesEmptyView();
+function renderFavourites (gifs) {
+  const gifsToRender = gifs.map(simpleView).join('\n');
+
+  if(gifsToRender.length > 0) {
+    document.querySelector(CONTAINER).innerHTML = favouritesView(gifsToRender);
   } else {
-    document.querySelector(CONTAINER).innerHTML = favouritesView(gifs);
+    document.querySelector(CONTAINER).innerHTML = favouritesEmptyView(gifsToRender);
+  }
+}
+
+export const toggleFavoriteStatus = (gifId) => {
+  const favorites = getFavorites();
+  const heartSpan = document.querySelector(`span[data-gif-id="${gifId}"]`);
+  
+  if (favorites.includes(gifId)) {
+    removeFavorite(gifId);
+    heartSpan.classList.remove('active')
+    heartSpan.innerHTML = EMPTY_HEART;
+  } else {
+    addFavorite(gifId);
+    heartSpan.classList.add('active');
+    heartSpan.innerHTML = FULL_HEART;
   }
 };
 
@@ -105,3 +124,13 @@ export async function renderSearchItems (searchTerm, offset = 0) {
     window.gifLoading = false;
   }
 }
+
+// export const renderFavourites = (data) => {
+//   const gifs = data.map((gif) => simpleViewFav(gif)).join('\n');
+
+//   if (gifs.length === 0) {
+//     document.querySelector(CONTAINER).innerHTML = favouritesEmptyView();
+//   } else {
+//     document.querySelector(CONTAINER).innerHTML = favouritesView(gifs);
+//   }
+// };

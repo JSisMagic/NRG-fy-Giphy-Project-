@@ -6,7 +6,7 @@ import {
   FAVOURITES,
   CONTAINER,
 } from './components/constants.js';
-import { manageFavourites } from './components/data.js';
+import { toggleFavoriteStatus } from './components/engine.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -16,24 +16,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       await loadPage(event.target.getAttribute('data-page'));
     }
 
-    if (event.target.classList.contains('fav-button')) {
-      event.preventDefault();
-      const favButton = event.target;
-      const gifID = favButton.getAttribute('data-gif-id');
-
-      if (favButton.innerHTML === EMPTY_HEART) {
-        favButton.innerHTML = FULL_HEART;
-        manageFavourites.add(gifID);
-      } else {
-        favButton.innerHTML = EMPTY_HEART;
-        manageFavourites.remove(gifID);
-        if (favButton.id === 'in-favourites') {
-          await loadPage(FAVOURITES);
-        }
-      }
+    if (event.target.classList.contains('favorite')) {
+      toggleFavoriteStatus(event.target.getAttribute('data-gif-id'));
     }
+
+
+
   });
 
+  // search events
   document.querySelector('input#search').addEventListener('input', async (event) => {
     window.searchTerm = event.target.value;
     await renderSearchItems(window.searchTerm, 0);
@@ -52,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  // upload
   document.getElementById('browse-button').addEventListener('change', async () => {
     gifUpload();
   });
