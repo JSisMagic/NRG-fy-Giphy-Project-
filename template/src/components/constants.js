@@ -17,3 +17,5 @@ export const GIFS_PER_LINE = 50;
 export const ABOUT = 'about';
 
 export const SEARCH_LIMIT = 25;
+
+export const KEY_NIA = 'Knd1RYxN4NBVdlpyCyMSpyyYLDfmW3ky';

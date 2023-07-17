@@ -1,6 +1,5 @@
-import { KEY_RADO, SEARCH_LIMIT } from './constants.js';
+import { KEY_RADO, SEARCH_LIMIT, KEY_GERGANA, KEY_NIA } from './constants.js';
 import { getFavorites } from './local-storage.js';
-
 
 const getGifById = async (gifId = '') => {
   try {
@@ -12,8 +11,7 @@ const getGifById = async (gifId = '') => {
   } catch (e) {
     console.error(e);
   }
-}
-
+};
 
 // const getGifsByIds = async (...Ids) => {
 //   try {
@@ -54,16 +52,15 @@ export const getSearchGifs = async (searchTerm = '', offset = 0) => {
 };
 
 export const loadFavorites = async () => {
-
   try {
     const gifIds = getFavorites();
-    return await Promise.allSettled(gifIds.map(async (id) => await getGifById(id)));
-
+    return await Promise.allSettled(
+      gifIds.map(async (id) => await getGifById(id))
+    );
   } catch (e) {
-    console.error(e)
+    console.error(e);
   }
 };
-
 
 // export const manageFavourites = {
 //   arr: [],
@@ -82,3 +79,15 @@ export const loadFavorites = async () => {
 //     return await getGifsByIds(ids);
 //   },
 // };
+
+export const gifUpload = async () => {
+  const apiKey = KEY_NIA;
+  const files = document.getElementById('browse-button').files;
+  const file = files[0];
+  const form = new FormData();
+  form.append('file', file);
+  await fetch(`http://upload.giphy.com/v1/gifs?api_key=${apiKey}`, {
+    method: 'POST',
+    body: form,
+  });
+};
