@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NRG-ify</title>
-    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="../styles/main.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
@@ -14,14 +14,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-    <link rel="icon" type="image/png" href="./images/favicon.png" />
+    <link rel="icon" type="image/png" href="../images/favicon.png" />
   </head>
 
   <body>
     <div id="app">
       <nav>
         <a href="#" class="nav-link" data-page="home">NRG-ify</a>
-        <a href="#" class="nav-link" data-page="favorites">Favorites</a>
+        <a href="#" class="nav-link" data-page="favourites">Favourites</a>
         <form>
           <a href="#" id="upload-button" data-page="Upload">Upload</a>
           <input id="browse-button" style="display: none" type="file" />
@@ -37,7 +37,12 @@
       </div>
       <footer class="footer-container">
         <div>
-          <img id="giphy-logo" src="./images/giphy_logo.png" alt="" srcset="" />
+          <img
+            id="giphy-logo"
+            src="../images/giphy_logo.png"
+            alt=""
+            srcset=""
+          />
           <p>
             All information has been taken from
             <a href="https://giphy.com/">GIPHY</a>
@@ -52,7 +57,7 @@
     </div>
 
     <!-- app -->
-    <script src="./index.js" type="module"></script>
+    <script src="../src/index.js" type="module"></script>
     <!-- end app -->
   </body>
 </html>
