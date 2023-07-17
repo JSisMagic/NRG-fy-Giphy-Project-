@@ -14,4 +14,6 @@ export const KEY_RADO = '8sqJpEYE537qoAIdMmET7e54DABNO8vP';
 
 export const GIFS_PER_LINE = 50;
 
-export const SEARCH = 'search';
+export const ABOUT = 'about';
+
+export const SEARCH_LIMIT = 25;

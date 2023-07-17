@@ -3,9 +3,10 @@ import {
   HOME,
   GIFS_PER_LINE,
   FAVOURITES,
-  SEARCH,
+  ABOUT,
+  SEARCH_LIMIT,
 } from './constants.js';
-import { getSearchResults, getTrendingGifs } from './data.js';
+import { getTrendingGifs, getSearchGifs } from './data.js';
 import { simpleView, simpleViewFav } from './views/simple-view.js';
 import { homeView } from './views/home-view.js';
 import {
@@ -13,6 +14,7 @@ import {
   favouritesEmptyView,
 } from './views/favourites-view.js';
 import { searchView } from './views/search-view.js';
+import { toAboutView } from './views/about-view.js';
 import { manageFavourites } from './data.js';
 
 export const loadPage = async (page = '', searchTerm = '') => {
@@ -30,10 +32,9 @@ export const loadPage = async (page = '', searchTerm = '') => {
     setActiveNav(FAVOURITES);
     return renderFavourites(gifs);
 
-  case SEARCH:
-    const searchArr = await getSearchResults(searchTerm);
-
-    return renderSearchResults(searchArr, searchTerm);
+  case ABOUT:
+    setActiveNav(ABOUT);
+    return renderAbout();
 
   default:
     return null;
@@ -72,4 +73,35 @@ function renderSearchResults(gifsArr, searchTerm) {
   const gifs = gifsArr.slice(0, GIFS_PER_LINE).map(simpleView).join('\n');
 
   document.querySelector(CONTAINER).innerHTML = searchView(gifs, searchTerm);
+}
+
+const renderAbout = () => {
+  document.querySelector(CONTAINER).innerHTML = toAboutView();
+};
+
+window.offset = 0;
+window.gifLoading = false;
+
+export async function renderSearchItems (searchTerm, offset = 0) {
+
+  if (!window.gifLoading) {
+
+    try {
+      const gifsObj = await getSearchGifs(searchTerm, offset);
+
+      const gifs = gifsObj.data.map(simpleView).join('\n');
+
+      document.querySelector(CONTAINER).innerHTML = searchView(gifs, searchTerm);
+
+      // document.querySelector(`#${SEARCH_RESULTS_TOTAL}`).innerHTML = gifsObj.pagination.total_count;
+      // searchView(gifsObj, searchTerm);
+
+      window.offset += SEARCH_LIMIT;
+
+    } catch (e) {
+      console.error(e);
+    }
+
+    window.gifLoading = false;
+  }
 }

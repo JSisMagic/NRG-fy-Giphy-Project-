@@ -1,4 +1,4 @@
-import { KEY_RADO } from './constants.js';
+import { KEY_RADO, SEARCH_LIMIT } from './constants.js';
 
 const getGifsByIds = async (Ids) => {
   try {
@@ -26,14 +26,13 @@ export const getTrendingGifs = async () => {
   }
 };
 
-export const getSearchResults = async (searchTerm) => {
+export const getSearchGifs = async (searchTerm = '', offset = 0) => {
   try {
-    const url = `https://api.giphy.com/v1/gifs/search?api_key=${KEY_RADO}&q=${searchTerm}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    const gifsArr = data.data;
+    const url = `https://api.giphy.com/v1/gifs/search?api_key=8sqJpEYE537qoAIdMmET7e54DABNO8vP&q=${searchTerm}&limit=${SEARCH_LIMIT}&offset=${offset}&rating=g`;
+    const results = await fetch(url);
+    const resultsObject = await results.json();
 
-    return gifsArr;
+    return resultsObject;
   } catch (e) {
     console.error(e);
   }
