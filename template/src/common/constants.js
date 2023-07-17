@@ -19,3 +19,5 @@ export const keyRado = '8sqJpEYE537qoAIdMmET7e54DABNO8vP';
 export const SEARCH_LIMIT = 20;
 
 export const SEARCH_RESULTS_TOTAL = 'search-results-total';
+
+export const DETAILS = 'details';

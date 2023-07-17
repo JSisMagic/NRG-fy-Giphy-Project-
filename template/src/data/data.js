@@ -81,3 +81,12 @@ export const gifUpload = async () => {
     body: form,
   });
 };
+
+export const getGifById = async (id) => {
+  const url = `https://api.giphy.com/v1/gifs/${id}?api_key=${keyGergana}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  const gif = data.data;
+
+  return gif;
+};

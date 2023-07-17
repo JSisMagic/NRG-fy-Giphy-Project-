@@ -21,6 +21,7 @@ export const toGifSimple = (gif) => `
 <div class="movie-simple">
  <img class="image-display" src="${gif.images.fixed_height.url}" alt="${gif.title}" data-gif="${gif.id}">
  <br>
+ <a href="#" class="view-button" data-gif="${gif.id}">View details</a>
 </div>
 `;
 
@@ -31,7 +32,7 @@ const toMovieDetailed = (movie) => `
   <div class="movie-info-container">
     <div>Genre: ${movie.genre}</div>
     <div>Director: ${movie.director}</div>
-    <div>Staring: ${movie.stars.map(star=>star).join(', ')}</div>
+    <div>Staring: ${movie.stars.map((star) => star).join(', ')}</div>
     <div>Plot: ${movie.description}</div>
   </div>
 </div>
