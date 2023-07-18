@@ -5,12 +5,19 @@ import {
   EMPTY_HEART,
   SEARCH_RESULTS_TOTAL,
   DETAILS,
-  UPLOADED,
 } from './components/constants.js';
 import { toggleFavoriteStatus } from './components/engine.js';
 import { gifUpload } from './components/data.js';
 
+/**
+ * Event listener function that listens for the 'DOMContentLoaded' event, triggered when the initial HTML document has been completely loaded and parsed.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>} A Promise that resolves when the Home page is loaded.
+ */
 document.addEventListener('DOMContentLoaded', async () => {
+  // Click event listener function
   document.addEventListener('click', async (event) => {
 
     if (event.target.classList.contains('nav-link')) {
@@ -33,8 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   /**
- * Event listener function that listens for the 'popstate' event, triggered when the browser's history changes due to the user navigating back or forward.
- * If the event's state object contains a 'backButtonClicked' property set to true, it loads the Home page.
+ * Event listener function that listens for the 'popstate' event, triggered when the browser's history changes.
  *
  * @function
  * @param {PopStateEvent} event - The 'popstate' event object.
@@ -46,11 +52,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  /**
+ * Event listener function that listens for a 'click' event and pushes a new state to the browser's history.
+ *
+ * @function
+ * @returns {void}
+ */
   document.addEventListener('click', () => {
     history.pushState({ backButtonClicked: true }, '');
   });
 
   // search events
+
+  /**
+ * Event listener function that listens for an 'input' event on the search input element.
+ *
+ * @function
+ * @param {Event} event - The 'input' event object.
+ * @returns {Promise<void>} A Promise that resolves when the search items are rendered.
+ */
   document
     .querySelector('input#search')
     .addEventListener('input', async (event) => {
@@ -60,6 +80,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       await renderSearchItems(window.searchTerm, window.offset);
     });
 
+  /**
+ * Event listener function that listens for a 'scroll' event on the window.
+ *
+ * @function
+ * @returns {void}
+ */
   window.addEventListener('scroll', () => {
     if (
       window.scrollY + window.innerHeight >=
@@ -71,13 +97,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  /**
+ * Event listener function that listens for a 'change' event on the input element with the ID 'browse-button'.
+ *
+ * @function
+ * @returns {void}
+ */
   document
     .querySelector('#browse-button')
     .addEventListener('change', async () => {
       if (document.getElementById('browse-button').files[0].size > 0) {
         console.log('uploading');
         await gifUpload();
-        document.getElementById('browse-button').files = [];
+        document.getElementById('browse-button').value = '';
       } else {
         alert('Cannot upload empty file!');
       }

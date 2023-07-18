@@ -1,5 +1,5 @@
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-const uploadedGifs = JSON.parse(localStorage.getItem("uploadedGifs")) || [];
+const uploadedGifs = JSON.parse(localStorage.getItem('uploadedGifs')) || [];
 
 
 export const addFavorite = (gifId) => {
@@ -22,7 +22,7 @@ export const addUploaded = gifId => {
     return;
   }
   uploadedGifs.push(gifId);
-  localStorage.setItem("uploadedGifs", JSON.stringify(uploadedGifs));
+  localStorage.setItem('uploadedGifs', JSON.stringify(uploadedGifs));
 };
 
 
