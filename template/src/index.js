@@ -5,6 +5,7 @@ import {
   EMPTY_HEART,
   FAVOURITES,
   CONTAINER,
+  SEARCH_RESULTS_TOTAL,
 } from './components/constants.js';
 import { toggleFavoriteStatus } from './components/engine.js';
 import { gifUpload } from './components/data.js';
@@ -29,10 +30,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     .querySelector('input#search')
     .addEventListener('input', async (event) => {
       window.searchTerm = event.target.value;
-      await renderSearchItems(window.searchTerm, 0);
-
-      // const container = document.querySelector(CONTAINER);
-      // container.innerHTML = `<h1><span id="${SEARCH_RESULTS_TOTAL}"></span> results for "${window.searchTerm}"<h1>`;
+      window.offset = 0;
+      
+      await renderSearchItems(window.searchTerm, window.offset);
     });
 
   window.addEventListener('scroll', () => {

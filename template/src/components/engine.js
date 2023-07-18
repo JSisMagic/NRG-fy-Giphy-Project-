@@ -7,6 +7,7 @@ import {
   SEARCH_LIMIT,
   EMPTY_HEART,
   FULL_HEART,
+  SEARCH_RESULTS_TOTAL,
 } from './constants.js';
 import { getTrendingGifs, getSearchGifs, loadFavorites } from './data.js';
 import { simpleView } from './views/simple-view.js';
@@ -88,32 +89,33 @@ export const toggleFavoriteStatus = (gifId) => {
   }
 };
 
-function renderSearchResults(gifsArr, searchTerm) {
-  const gifs = gifsArr.slice(0, GIFS_PER_LINE).map(simpleView).join('\n');
+// function renderSearchResults(gifsArr, searchTerm) {
+//   const gifs = gifsArr.slice(0, GIFS_PER_LINE).map(simpleView).join('\n');
 
-  document.querySelector(CONTAINER).innerHTML = searchView(gifs, searchTerm);
-}
+//   document.querySelector(CONTAINER).innerHTML = searchView(gifs, searchTerm);
+// }
 
-const renderAbout = () => {
-  document.querySelector(CONTAINER).innerHTML = toAboutView();
-};
+// const renderAbout = () => {
+//   document.querySelector(CONTAINER).innerHTML = toAboutView();
+// };
 
-window.offset = 0;
 window.gifLoading = false;
 
 export async function renderSearchItems (searchTerm, offset = 0) {
+
+  offset === 0 
+  ? document.querySelector(CONTAINER)
+    .innerHTML = `<h1><span id="${SEARCH_RESULTS_TOTAL}"></span> results for "${window.searchTerm}"<h1>` 
+  : document.querySelector(CONTAINER).innerHTML
 
   if (!window.gifLoading) {
 
     try {
       const gifsObj = await getSearchGifs(searchTerm, offset);
-
       const gifs = gifsObj.data.map(simpleView).join('\n');
 
-      document.querySelector(CONTAINER).innerHTML = searchView(gifs, searchTerm);
-
-      // document.querySelector(`#${SEARCH_RESULTS_TOTAL}`).innerHTML = gifsObj.pagination.total_count;
-      // searchView(gifsObj, searchTerm);
+      document.querySelector(`#${SEARCH_RESULTS_TOTAL}`).innerHTML = gifsObj.pagination.total_count;
+      document.querySelector(CONTAINER).innerHTML += searchView(gifs);
 
       window.offset += SEARCH_LIMIT;
 

@@ -2,12 +2,12 @@ import { FULL_HEART, EMPTY_HEART } from '../constants.js';
 import { getFavorites } from '../local-storage.js';
 
 export const simpleView = (gif) => `
-  <div class="gif-simple">
+<div class="gif-simple">
   <img class="image-display" src="${gif.images.fixed_height.url}" alt="${gif.title}" data-gif="${gif.id}">
-  <div class="details-link"><p class="view-details" data-gif-id="${
-    gif.id
-  }">View Details</p></div>
-    ${renderFavoriteStatus(gif.id)}
+  <div class="details-link">
+    <p class="view-details" data-gif-id="${gif.id}">View Details</p>
+  </div>
+  ${renderFavoriteStatus(gif.id)}
 </div>`;
 
 const renderFavoriteStatus = (gifId) => {
