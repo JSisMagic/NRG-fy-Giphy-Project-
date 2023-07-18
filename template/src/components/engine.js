@@ -8,8 +8,9 @@ import {
   EMPTY_HEART,
   FULL_HEART,
   SEARCH_RESULTS_TOTAL,
+  DETAILS,
 } from './constants.js';
-import { getTrendingGifs, getSearchGifs, loadFavorites } from './data.js';
+import { getTrendingGifs, getSearchGifs, loadFavorites, getGifById } from './data.js';
 import { simpleView } from './views/simple-view.js';
 import { homeView } from './views/home-view.js';
 import {
@@ -17,10 +18,10 @@ import {
   favouritesEmptyView,
 } from './views/favourites-view.js';
 import { searchView } from './views/search-view.js';
-import { toAboutView } from './views/about-view.js';
 import { getFavorites, addFavorite, removeFavorite } from './local-storage.js';
+import { gifDetailedView } from './views/gif-detailed-view.js';
 
-export const loadPage = async (page = '', searchTerm = '') => {
+export const loadPage = async (page = '', id) => {
   switch (page) {
   case HOME:
     setActiveNav(HOME);
@@ -39,6 +40,11 @@ export const loadPage = async (page = '', searchTerm = '') => {
   case ABOUT:
     setActiveNav(ABOUT);
     return renderAbout();
+
+  case DETAILS:
+    const gif = await getGifById(id);
+    console.log(gif);
+    return renderGifDetails(gif);
 
   default:
     return null;
@@ -61,6 +67,10 @@ function renderHome(trendingArr) {
   const gifs = trendingArr.slice(0, GIFS_PER_LINE).map(simpleView).join('\n');
 
   document.querySelector(CONTAINER).innerHTML = homeView(gifs);
+}
+
+function renderGifDetails(gif) {
+  document.querySelector(CONTAINER).innerHTML = gifDetailedView(gif);
 }
 
 

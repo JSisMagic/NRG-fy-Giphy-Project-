@@ -1,9 +1,9 @@
 import { KEY_RADO, SEARCH_LIMIT, KEY_GERGANA, KEY_NIA } from './constants.js';
 import { getFavorites } from './local-storage.js';
 
-const getGifById = async (gifId = '') => {
+export const getGifById = async (gifId = '') => {
   try {
-    const url = `https://api.giphy.com/v1/gifs/${gifId}?api_key=8sqJpEYE537qoAIdMmET7e54DABNO8vP&rating=g`;
+    const url = `https://api.giphy.com/v1/gifs/${gifId}?api_key=${KEY_GERGANA}`;
     const result = await fetch(url);
     const resultObject = await result.json();
 
@@ -28,7 +28,7 @@ const getGifById = async (gifId = '') => {
 
 export const getTrendingGifs = async () => {
   try {
-    const url = `https://api.giphy.com/v1/gifs/trending?api_key=${KEY_RADO}`;
+    const url = `https://api.giphy.com/v1/gifs/trending?api_key=${KEY_RADO}&limit=${SEARCH_LIMIT}`;
     const response = await fetch(url);
     const data = await response.json();
     const gifsArr = data.data;

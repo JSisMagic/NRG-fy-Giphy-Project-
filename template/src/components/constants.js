@@ -21,3 +21,5 @@ export const SEARCH_LIMIT = 25;
 export const KEY_NIA = 'Knd1RYxN4NBVdlpyCyMSpyyYLDfmW3ky';
 
 export const SEARCH_RESULTS_TOTAL = 'search-results-total';
+
+export const DETAILS = 'details';

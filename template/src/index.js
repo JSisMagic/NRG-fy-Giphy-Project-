@@ -6,6 +6,7 @@ import {
   FAVOURITES,
   CONTAINER,
   SEARCH_RESULTS_TOTAL,
+  DETAILS,
 } from './components/constants.js';
 import { toggleFavoriteStatus } from './components/engine.js';
 import { gifUpload } from './components/data.js';
@@ -23,6 +24,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (event.target === document.getElementById('upload-button')) {
       document.getElementById('browse-button').click();
     }
+
+    if (event.target.classList.contains('image-display')) {
+      const id = event.target.getAttribute('data-gif');
+      await loadPage(DETAILS, id);
+    }
+    
+  });
+
+  window.addEventListener('popstate', async (event) => {
+    if (event.state && event.state.backButtonClicked) {
+      await loadPage(HOME);
+    }
+  });
+
+  document.addEventListener('click', () => {
+    history.pushState({ backButtonClicked: true }, '');
   });
 
   // search events
@@ -56,7 +73,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       } else {
         alert('Cannot upload empty file!');
       }
-    });
+  });
+
 
   await loadPage(HOME);
 });
