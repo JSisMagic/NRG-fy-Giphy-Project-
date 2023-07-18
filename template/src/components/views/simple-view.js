@@ -3,11 +3,10 @@ import { getFavorites } from '../local-storage.js';
 
 export const simpleView = (gif) => `
 <div class="gif-simple">
-  <img class="image-display" src="${gif.images.fixed_height.url}" alt="${gif.title}" data-gif="${gif.id}">
-  <div class="details-link">
-    <p class="view-details" data-gif-id="${gif.id}">View Details</p>
-  </div>
-  ${renderFavoriteStatus(gif.id)}
+${renderFavoriteStatus(gif.id)}
+  <a href=# class="view-button view-details" data-gif-id="${gif.id}">
+    <img class="image-display" src="${gif.images.fixed_height.url}" alt="${gif.title}" data-gif="${gif.id}">
+  </a>
 </div>`;
 
 const renderFavoriteStatus = (gifId) => {

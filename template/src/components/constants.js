@@ -4,9 +4,9 @@ export const FAVOURITES = 'favourites';
 
 export const CONTAINER = '#container';
 
-export const FULL_HEART = '❤';
+export const FULL_HEART = '♥️';
 
-export const EMPTY_HEART = '♡';
+export const EMPTY_HEART = '🤍';
 
 export const KEY_GERGANA = 'iRL7ws2UkipBN5Qha1eiWXGIk7aep4h8';
 

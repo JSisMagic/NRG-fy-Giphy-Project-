@@ -76,16 +76,25 @@ input#search {
 }
 
 span.favorite {
+  display: none;
+  position: absolute;
   padding-left: 10px;
+  padding-top: 10px;
   cursor: pointer;
 }
 
-span.favorite.active {
+.gif-simple:hover span.favorite {
+  display: inline;
+}
+
+span.favorite.active:hover {
   color: rgb(255, 0, 149);
+  text-shadow: 0px 0px 10px rgb(248, 22, 63);
 }
 
 span.favorite:hover {
-  color: rgb(187, 135, 255);
+  /* color: rgb(187, 135, 255); */
+  text-shadow: 0px 0px 10px rgb(255, 255, 255);
 }
 
 ::-webkit-scrollbar {

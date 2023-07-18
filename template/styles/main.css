@@ -31,6 +31,7 @@
 
 .gif-simple {
   display: block;
+  position: relative;
   float: left;
   align-items: center;
   width: min-content;
