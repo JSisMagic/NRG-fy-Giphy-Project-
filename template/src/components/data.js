@@ -1,6 +1,16 @@
 import { KEY_RADO, SEARCH_LIMIT, KEY_GERGANA, KEY_NIA } from './constants.js';
-import { getFavorites } from './local-storage.js';
+import { addUploaded, getFavorites, getUploaded } from './local-storage.js';
 
+
+export const getGifsByIds = async ids => {
+  try {
+    const getByIdsURL = `https://api.giphy.com/v1/gifs?api_key=${KEY_RADO}&ids=${ids.join("%2C")}`;
+    const { data } = await fetch(getByIdsURL).then(res => res.json());
+    return data;
+  } catch (e) {
+    console.error(e);
+  }
+};
 export const getGifById = async (gifId = '') => {
   try {
     const url = `https://api.giphy.com/v1/gifs/${gifId}?api_key=${KEY_GERGANA}`;
@@ -48,14 +58,11 @@ export const loadFavorites = async () => {
     console.error(e);
   }
 };
-
-export const getRandomGif = async () => {
+export const loadUploaded = async () => {
   try {
-    const url = `https://api.giphy.com/v1/gifs/random?api_key=${KEY_NIA}`;
-    const results = await fetch(url);
-    const resultsObject = await results.json();
-
-    return resultsObject.data;
+    const uploaded = getUploaded();
+    const data = (uploaded.length !== 0) ? await getGifsByIds(uploaded) : null;
+    return data;
   } catch (e) {
     console.error(e);
   }
@@ -67,8 +74,9 @@ export const gifUpload = async () => {
   const file = files[0];
   const form = new FormData();
   form.append('file', file);
-  await fetch(`http://upload.giphy.com/v1/gifs?api_key=${apiKey}`, {
+  const response = await fetch(`http://upload.giphy.com/v1/gifs?api_key=${apiKey}`, {
     method: 'POST',
     body: form,
-  });
+  }).then(resp => resp.json());
+  addUploaded(response.data.id);
 };

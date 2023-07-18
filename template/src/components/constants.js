@@ -1,6 +1,7 @@
 export const HOME = 'home';
 
 export const FAVOURITES = 'favourites';
+export const UPLOADED = 'uploaded';
 
 export const CONTAINER = '#container';
 

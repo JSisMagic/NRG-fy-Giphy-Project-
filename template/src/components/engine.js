@@ -9,8 +9,9 @@ import {
   FULL_HEART,
   SEARCH_RESULTS_TOTAL,
   DETAILS,
+  UPLOADED,
 } from './constants.js';
-import { getTrendingGifs, getSearchGifs, loadFavorites, getGifById, getRandomGif } from './data.js';
+import { getTrendingGifs, getSearchGifs, loadFavorites, getGifById, loadUploaded } from './data.js';
 import { simpleView } from './views/simple-view.js';
 import { homeView } from './views/home-view.js';
 import {
@@ -21,39 +22,45 @@ import { searchView } from './views/search-view.js';
 import { toAboutView } from './views/about-view.js';
 import { getFavorites, addFavorite, removeFavorite } from './local-storage.js';
 import { gifDetailedView } from './views/gif-detailed-view.js';
+import { uploadedEmptyView, uploadedView } from './views/uploaded-view.js';
 
 export const loadPage = async (page = '', id) => {
   switch (page) {
-  case HOME:
-    setActiveNav(HOME);
+    case HOME:
+      setActiveNav(HOME);
 
-    const trendingArr = await getTrendingGifs();
+      const trendingArr = await getTrendingGifs();
 
-    return renderHome(trendingArr);
+      return renderHome(trendingArr);
 
-  case FAVOURITES:
-    setActiveNav(FAVOURITES);
-    const loadedGifs = await loadFavorites();
-    const gifs = loadedGifs.map((element) => element.value);
+    case FAVOURITES:
+      const loadedGifs = await loadFavorites();
+      const gifs = loadedGifs.map((element) => element.value);
 
-    if (gifs.length > 0) {
-      return renderFavourites(gifs);
-    } else {
-      const randomGif = await getRandomGif();
-      return renderFavourites('', randomGif);
-    }
+      if (gifs.length > 0) {
+        return renderFavourites(gifs);
+      } else {
+        const randomGif = await getRandomGif();
+        return renderFavourites('', randomGif);
+      }
 
-  case ABOUT:
-    setActiveNav(ABOUT);
-    return renderAbout();
+    case UPLOADED:
+      const uploadedGifs = await loadUploaded();
 
-  case DETAILS:
-    const gif = await getGifById(id);
-    console.log(gif);
-    return renderGifDetails(gif);
+      return renderUploaded(uploadedGifs);
 
-  default:
-    return null;
+
+    case ABOUT:
+      setActiveNav(ABOUT);
+      return renderAbout();
+
+    case DETAILS:
+      const gif = await getGifById(id);
+      console.log(gif);
+      return renderGifDetails(gif);
+
+    default:
+      return null;
   }
 };
 
@@ -86,9 +93,16 @@ function renderFavourites(gifs, randomGif) {
     const gifsToRender = gifs.map(simpleView).join('\n');
     document.querySelector(CONTAINER).innerHTML = favouritesView(gifsToRender);
   } else {
-    const randomGifToRender = simpleView(randomGif);
-    // const randomGifToRender = randomGif.map(simpleView).join('\n');
-    document.querySelector(CONTAINER).innerHTML = favouritesEmptyView(randomGifToRender);
+    document.querySelector(CONTAINER).innerHTML = favouritesEmptyView(gifsToRender);
+  }
+}
+function renderUploaded(gifs) {
+  const gifsToRender = gifs.map(simpleView).join('\n');
+  console.log(gifs);
+  if (gifsToRender.length > 0) {
+    document.querySelector(CONTAINER).innerHTML = uploadedView(gifsToRender);
+  } else {
+    document.querySelector(CONTAINER).innerHTML = uploadedEmptyView(gifsToRender);
   }
 }
 

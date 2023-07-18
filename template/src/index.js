@@ -11,6 +11,7 @@ import { gifUpload } from './components/data.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   document.addEventListener('click', async (event) => {
+
     if (event.target.classList.contains('nav-link')) {
       await loadPage(event.target.getAttribute('data-page'));
     }
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   window.addEventListener('scroll', () => {
     if (
       window.scrollY + window.innerHeight >=
-        document.documentElement.scrollHeight &&
+      document.documentElement.scrollHeight &&
       document.getElementById('search-results-total')
     ) {
       renderSearchItems(window.searchTerm, window.offset);
