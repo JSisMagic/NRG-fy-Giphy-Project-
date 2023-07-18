@@ -10,7 +10,7 @@ import {
   SEARCH_RESULTS_TOTAL,
   DETAILS,
 } from './constants.js';
-import { getTrendingGifs, getSearchGifs, loadFavorites, getGifById } from './data.js';
+import { getTrendingGifs, getSearchGifs, loadFavorites, getGifById, getRandomGif } from './data.js';
 import { simpleView } from './views/simple-view.js';
 import { homeView } from './views/home-view.js';
 import {
@@ -31,11 +31,16 @@ export const loadPage = async (page = '', id) => {
     return renderHome(trendingArr);
 
   case FAVOURITES:
+    setActiveNav(FAVOURITES);
     const loadedGifs = await loadFavorites();
     const gifs = loadedGifs.map((element) => element.value);
 
-    setActiveNav(FAVOURITES);
-    return renderFavourites(gifs);
+    if(gifs.length > 0) {
+      return renderFavourites(gifs);
+    } else {
+      const randomGif = await getRandomGif();
+      return renderFavourites('',randomGif);
+    }
 
   case ABOUT:
     setActiveNav(ABOUT);
@@ -74,13 +79,15 @@ function renderGifDetails(gif) {
 }
 
 
-function renderFavourites (gifs) {
-  const gifsToRender = gifs.map(simpleView).join('\n');
-
-  if(gifsToRender.length > 0) {
+function renderFavourites (gifs, randomGif) {
+  
+  if(gifs.length > 0) {
+    const gifsToRender = gifs.map(simpleView).join('\n');
     document.querySelector(CONTAINER).innerHTML = favouritesView(gifsToRender);
   } else {
-    document.querySelector(CONTAINER).innerHTML = favouritesEmptyView(gifsToRender);
+    const randomGifToRender = simpleView(randomGif);
+    // const randomGifToRender = randomGif.map(simpleView).join('\n');
+    document.querySelector(CONTAINER).innerHTML = favouritesEmptyView(randomGifToRender);
   }
 }
 

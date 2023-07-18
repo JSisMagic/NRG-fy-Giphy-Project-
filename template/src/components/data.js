@@ -62,6 +62,19 @@ export const loadFavorites = async () => {
   }
 };
 
+export const getRandomGif = async () => {
+  try {
+    const url = `https://api.giphy.com/v1/gifs/random?api_key=${KEY_NIA}`;
+    const results = await fetch(url);
+    const resultsObject = await results.json();
+
+    return resultsObject.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+
 // export const manageFavourites = {
 //   arr: [],
 
