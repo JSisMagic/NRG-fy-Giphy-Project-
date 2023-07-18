@@ -32,6 +32,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   });
 
+  /**
+ * Event listener function that listens for the 'popstate' event, triggered when the browser's history changes due to the user navigating back or forward.
+ * If the event's state object contains a 'backButtonClicked' property set to true, it loads the Home page.
+ *
+ * @function
+ * @param {PopStateEvent} event - The 'popstate' event object.
+ * @returns {Promise<void>} A Promise that resolves when the Home page is loaded (if needed).
+ */
   window.addEventListener('popstate', async (event) => {
     if (event.state && event.state.backButtonClicked) {
       await loadPage(HOME);

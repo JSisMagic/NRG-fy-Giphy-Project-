@@ -22,6 +22,16 @@ export const getGifById = async (gifId = '') => {
   }
 };
 
+/**
+ * Retrieves GIF data from the Giphy API based on the given GIF IDs.
+ *
+ * @async
+ * @function
+ * @param {Array<string>} ids - An array of GIF IDs for which to retrieve the GIF data.
+ * @return {Promise<Array<Object>|undefined>} A Promise that resolves to an array of GIF data objects representing the GIFs with the provided IDs.
+ * If an error occurs during the API call, it returns undefined.
+ * @throws {Error} If there is an error while fetching the GIF data.
+ */
 export const getGifsByIds = async ids => {
   try {
     const getByIdsURL = `https://api.giphy.com/v1/gifs?api_key=${KEY_RADO}&ids=${ids.join('%2C')}`;
@@ -31,7 +41,6 @@ export const getGifsByIds = async ids => {
     console.error(e);
   }
 };
-
 
 /**
  * Retrieves a list of trending GIFs from the Giphy API.
@@ -115,6 +124,15 @@ export const getRandomGif = async () => {
   }
 };
 
+/**
+ * Loads the user-uploaded GIFs by retrieving their data from the Giphy API based on the uploaded GIF IDs.
+ *
+ * @async
+ * @function
+ * @return {Promise<Array<Object>|null>} A Promise that resolves to an array of GIF data objects representing the user-uploaded GIFs.
+ * If there are no uploaded GIFs or an error occurs during the API call, it returns null.
+ * @throws {Error} If there is an error while retrieving the uploaded GIF data.
+ */
 export const loadUploaded = async () => {
   try {
     const uploaded = getUploaded();

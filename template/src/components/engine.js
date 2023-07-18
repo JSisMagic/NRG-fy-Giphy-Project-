@@ -36,43 +36,43 @@ import { uploadedEmptyView, uploadedView } from './views/uploaded-view.js';
  */
 export const loadPage = async (page = '', id) => {
   switch (page) {
-    case HOME:
-      setActiveNav(HOME);
+  case HOME:
+    setActiveNav(HOME);
 
-      const trendingArr = await getTrendingGifs();
+    const trendingArr = await getTrendingGifs();
 
-      return renderHome(trendingArr);
+    return renderHome(trendingArr);
 
-    case FAVOURITES:
-      setActiveNav(FAVOURITES);
+  case FAVOURITES:
+    setActiveNav(FAVOURITES);
 
-      const loadedGifs = await loadFavorites();
-      const gifs = loadedGifs.map((element) => element.value);
+    const loadedGifs = await loadFavorites();
+    const gifs = loadedGifs.map((element) => element.value);
 
-      if (gifs.length > 0) {
-        return renderFavourites(gifs);
-      } else {
-        const randomGif = await getRandomGif();
-        return renderFavourites('', randomGif);
-      }
+    if (gifs.length > 0) {
+      return renderFavourites(gifs);
+    } else {
+      const randomGif = await getRandomGif();
+      return renderFavourites('', randomGif);
+    }
 
-    case UPLOADED:
-      setActiveNav(UPLOADED);
-      const uploadedGifs = await loadUploaded();
-      console.log(uploadedGifs);
-      return renderUploaded(uploadedGifs);
+  case UPLOADED:
+    setActiveNav(UPLOADED);
+    const uploadedGifs = await loadUploaded();
+    console.log(uploadedGifs);
+    return renderUploaded(uploadedGifs);
 
-    case ABOUT:
-      setActiveNav(ABOUT);
-      return renderAbout();
+  case ABOUT:
+    setActiveNav(ABOUT);
+    return renderAbout();
 
-    case DETAILS:
-      const gif = await getGifById(id);
-      console.log(gif);
-      return renderGifDetails(gif);
+  case DETAILS:
+    const gif = await getGifById(id);
+    console.log(gif);
+    return renderGifDetails(gif);
 
-    default:
-      return null;
+  default:
+    return null;
   }
 };
 
@@ -138,6 +138,13 @@ function renderFavourites(gifs, randomGif) {
   }
 }
 
+/**
+ * Renders the uploaded GIFs view based on the provided GIF data.
+ *
+ * @function
+ * @param {Array<Object>} gifs - An array of uploaded GIF data objects to be displayed in the uploaded view.
+ * @return {void}
+ */
 function renderUploaded(gifs) {
   const gifsToRender = gifs.map(simpleView).join('\n');
   console.log(gifs);
@@ -171,7 +178,7 @@ export const toggleFavoriteStatus = (gifId) => {
     addFavorite(gifId);
     heartSpan.classList.add('active');
     heartSpan.innerHTML = FULL_HEART;
-    
+
     if (document.getElementById('favourites-link').classList.contains('active')) {
       loadPage(FAVOURITES);
     }
