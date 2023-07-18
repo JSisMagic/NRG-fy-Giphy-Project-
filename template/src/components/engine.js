@@ -36,43 +36,43 @@ import { uploadedEmptyView, uploadedView } from './views/uploaded-view.js';
  */
 export const loadPage = async (page = '', id) => {
   switch (page) {
-  case HOME:
-    setActiveNav(HOME);
+    case HOME:
+      setActiveNav(HOME);
 
-    const trendingArr = await getTrendingGifs();
+      const trendingArr = await getTrendingGifs();
 
-    return renderHome(trendingArr);
+      return renderHome(trendingArr);
 
-  case FAVOURITES:
-    setActiveNav(FAVOURITES);
+    case FAVOURITES:
+      setActiveNav(FAVOURITES);
 
-    const loadedGifs = await loadFavorites();
-    const gifs = loadedGifs.map((element) => element.value);
+      const loadedGifs = await loadFavorites();
+      const gifs = loadedGifs.map((element) => element.value);
 
-    if (gifs.length > 0) {
-      return renderFavourites(gifs);
-    } else {
-      const randomGif = await getRandomGif();
-      return renderFavourites('', randomGif);
-    }
+      if (gifs.length > 0) {
+        return renderFavourites(gifs);
+      } else {
+        const randomGif = await getRandomGif();
+        return renderFavourites('', randomGif);
+      }
 
-  case UPLOADED:
-    setActiveNav(UPLOADED);
-    const uploadedGifs = await loadUploaded();
-    console.log(uploadedGifs);
-    return renderUploaded(uploadedGifs);
+    case UPLOADED:
+      setActiveNav(UPLOADED);
+      const uploadedGifs = await loadUploaded();
+      console.log(uploadedGifs);
+      return renderUploaded(uploadedGifs);
 
-  case ABOUT:
-    setActiveNav(ABOUT);
-    return renderAbout();
+    case ABOUT:
+      setActiveNav(ABOUT);
+      return renderAbout();
 
-  case DETAILS:
-    const gif = await getGifById(id);
-    console.log(gif);
-    return renderGifDetails(gif);
+    case DETAILS:
+      const gif = await getGifById(id);
+      console.log(gif);
+      return renderGifDetails(gif);
 
-  default:
-    return null;
+    default:
+      return null;
   }
 };
 
@@ -163,7 +163,10 @@ export const toggleFavoriteStatus = (gifId) => {
     removeFavorite(gifId);
     heartSpan.classList.remove('active');
     heartSpan.innerHTML = EMPTY_HEART;
-    loadPage(FAVOURITES);
+
+    if (document.getElementById('favourites-link').classList.contains('active')) {
+      loadPage(FAVOURITES);
+    }
   } else {
     addFavorite(gifId);
     heartSpan.classList.add('active');
