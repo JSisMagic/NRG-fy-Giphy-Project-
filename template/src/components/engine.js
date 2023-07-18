@@ -59,16 +59,17 @@ export const loadPage = async (page = '', id) => {
   case UPLOADED:
     setActiveNav(UPLOADED);
     const uploadedGifs = await loadUploaded();
-    console.log(uploadedGifs);
+
     return renderUploaded(uploadedGifs);
 
   case ABOUT:
     setActiveNav(ABOUT);
+
     return renderAbout();
 
   case DETAILS:
     const gif = await getGifById(id);
-    console.log(gif);
+
     return renderGifDetails(gif);
 
   default:
@@ -147,7 +148,7 @@ function renderFavourites(gifs, randomGif) {
  */
 function renderUploaded(gifs) {
   const gifsToRender = gifs.map(simpleView).join('\n');
-  console.log(gifs);
+  
   if (gifsToRender.length > 0) {
     document.querySelector(CONTAINER).innerHTML = uploadedView(gifsToRender);
   } else {
@@ -201,7 +202,7 @@ export async function renderSearchItems(searchTerm, offset = 0) {
 
   offset === 0 ?
     document.querySelector(CONTAINER)
-      .innerHTML = `<h1><span id="${SEARCH_RESULTS_TOTAL}"></span> results for "${window.searchTerm}"<h1>` :
+      .innerHTML = `<h2><span id="${SEARCH_RESULTS_TOTAL}"></span> results for "${window.searchTerm}"<h2>` :
     document.querySelector(CONTAINER).innerHTML;
 
   if (!window.gifLoading) {
