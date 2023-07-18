@@ -1,6 +1,7 @@
 html,
 body {
   margin: 0;
+  background-color: black;
 }
 
 body {
@@ -10,6 +11,7 @@ body {
 div#app {
   display: grid;
   margin: 0 auto;
+  max-width: 1600px;
   grid-template-columns: auto 1fr auto;
   grid-template-rows: auto auto 1fr auto;
   grid-template-areas:
@@ -22,8 +24,9 @@ div#app {
 
 nav {
   grid-area: menu;
+  width: auto;
   height: 60px;
-  background-color: rgb(117, 117, 117);
+  background-color: rgb(0, 0, 0);
   font-size: 1.75em;
   line-height: 60px;
   padding: 20px;
@@ -34,11 +37,15 @@ nav {
 nav a {
   color: white;
   text-decoration: none;
-  margin: 0 10px;
+  margin: 0 20px;
 }
 
-nav a:hover {
-  color: rgb(115, 247, 205);
+.nav-link:hover {
+  border-bottom: 4px solid rgb(115, 247, 205);
+}
+
+#upload-button {
+  margin: 0px;
 }
 
 #container {
@@ -62,17 +69,22 @@ footer {
 
 a.active {
   color: white;
-  font-weight: bold;
+  border-bottom: 4px solid rgb(115, 247, 205);
 }
 
 input#search {
+  border: none;
   font-size: 20px;
+  border-bottom: 4px solid rgb(255, 0, 212);
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
-  border: 1px solid gray;
-  height: 24px;
+  height: 54px;
   flex: 1 0;
-  margin: auto;
+  margin: 0px 20px;
+}
+
+input#search:focus {
+  outline: none;
 }
 
 span.favorite {
@@ -98,17 +110,16 @@ span.favorite:hover {
 }
 
 ::-webkit-scrollbar {
-  width: 10px; 
+  width: 10px;
   height: 10px;
   background-color: black;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #888; 
-  border-radius: 6px; 
+  background-color: #888;
+  border-radius: 6px;
 }
-  
+
 ::-webkit-scrollbar-track:hover {
-  background-color: black; 
+  background-color: black;
 }
-  
