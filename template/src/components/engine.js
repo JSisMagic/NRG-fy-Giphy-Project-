@@ -34,6 +34,8 @@ export const loadPage = async (page = '', id) => {
       return renderHome(trendingArr);
 
     case FAVOURITES:
+      setActiveNav(FAVOURITES);
+
       const loadedGifs = await loadFavorites();
       const gifs = loadedGifs.map((element) => element.value);
 
@@ -45,6 +47,7 @@ export const loadPage = async (page = '', id) => {
       }
 
     case UPLOADED:
+      setActiveNav(UPLOADED);
       const uploadedGifs = await loadUploaded();
 
       return renderUploaded(uploadedGifs);
@@ -65,7 +68,7 @@ export const loadPage = async (page = '', id) => {
 };
 
 function setActiveNav(page) {
-  const navs = document.querySelectorAll('a.nav-link');
+  const navs = document.querySelectorAll('.nav-link');
 
   Array.from(navs).forEach((element) =>
     element.getAttribute('data-page') === page ?
