@@ -163,6 +163,7 @@ export const toggleFavoriteStatus = (gifId) => {
     removeFavorite(gifId);
     heartSpan.classList.remove('active');
     heartSpan.innerHTML = EMPTY_HEART;
+    loadPage(FAVOURITES);
   } else {
     addFavorite(gifId);
     heartSpan.classList.add('active');

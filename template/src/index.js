@@ -5,6 +5,7 @@ import {
   EMPTY_HEART,
   SEARCH_RESULTS_TOTAL,
   DETAILS,
+  UPLOADED,
 } from './components/constants.js';
 import { toggleFavoriteStatus } from './components/engine.js';
 import { gifUpload } from './components/data.js';
