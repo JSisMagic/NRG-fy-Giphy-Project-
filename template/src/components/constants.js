@@ -6,7 +6,7 @@ export const UPLOADED = 'uploaded';
 
 export const CONTAINER = '#container';
 
-export const FULL_HEART = '💛';
+export const FULL_HEART = '💜';
 
 export const EMPTY_HEART = '🤍';
 
