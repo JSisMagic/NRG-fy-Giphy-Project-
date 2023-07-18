@@ -1,4 +1,4 @@
-import { EMPTY_HEART } from "../constants.js";
+import { EMPTY_HEART } from '../constants.js';
 
 export const favouritesView = (gifs) =>
   `<div id="favourites">
@@ -13,5 +13,5 @@ export const favouritesEmptyView = (randomGif) => {
   To add it to favourites hover the GIF and click the ${EMPTY_HEART}</h3>
   <div class="gifs-list">
     ${randomGif}
-  </div>`
+  </div>`;
 };

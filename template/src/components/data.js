@@ -13,19 +13,6 @@ export const getGifById = async (gifId = '') => {
   }
 };
 
-// const getGifsByIds = async (...Ids) => {
-//   try {
-//     const url = `https://api.giphy.com/v1/gifs?ids=${Ids}&api_key=${KEY_RADO}`;
-//     const response = await fetch(url);
-//     const data = await response.json();
-//     return data.data;
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
-
-//
-
 export const getTrendingGifs = async () => {
   try {
     const url = `https://api.giphy.com/v1/gifs/trending?api_key=${KEY_RADO}&limit=${SEARCH_LIMIT}`;
@@ -55,7 +42,7 @@ export const loadFavorites = async () => {
   try {
     const gifIds = getFavorites();
     return await Promise.allSettled(
-      gifIds.map(async (id) => await getGifById(id))
+      gifIds.map(async (id) => await getGifById(id)),
     );
   } catch (e) {
     console.error(e);
@@ -73,25 +60,6 @@ export const getRandomGif = async () => {
     console.error(e);
   }
 };
-
-
-// export const manageFavourites = {
-//   arr: [],
-
-//   add(id) {
-//     this.arr.push(id);
-//   },
-
-//   remove(id) {
-//     this.arr = this.arr.filter((x) => x !== id);
-//   },
-
-//   async get() {
-//     const ids = this.arr.join(',');
-
-//     return await getGifsByIds(ids);
-//   },
-// };
 
 export const gifUpload = async () => {
   const apiKey = KEY_NIA;

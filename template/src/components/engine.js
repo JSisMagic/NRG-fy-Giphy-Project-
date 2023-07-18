@@ -18,6 +18,7 @@ import {
   favouritesEmptyView,
 } from './views/favourites-view.js';
 import { searchView } from './views/search-view.js';
+import { toAboutView } from './views/about-view.js';
 import { getFavorites, addFavorite, removeFavorite } from './local-storage.js';
 import { gifDetailedView } from './views/gif-detailed-view.js';
 
@@ -35,11 +36,11 @@ export const loadPage = async (page = '', id) => {
     const loadedGifs = await loadFavorites();
     const gifs = loadedGifs.map((element) => element.value);
 
-    if(gifs.length > 0) {
+    if (gifs.length > 0) {
       return renderFavourites(gifs);
     } else {
       const randomGif = await getRandomGif();
-      return renderFavourites('',randomGif);
+      return renderFavourites('', randomGif);
     }
 
   case ABOUT:
@@ -79,9 +80,9 @@ function renderGifDetails(gif) {
 }
 
 
-function renderFavourites (gifs, randomGif) {
-  
-  if(gifs.length > 0) {
+function renderFavourites(gifs, randomGif) {
+
+  if (gifs.length > 0) {
     const gifsToRender = gifs.map(simpleView).join('\n');
     document.querySelector(CONTAINER).innerHTML = favouritesView(gifsToRender);
   } else {
@@ -94,10 +95,10 @@ function renderFavourites (gifs, randomGif) {
 export const toggleFavoriteStatus = (gifId) => {
   const favorites = getFavorites();
   const heartSpan = document.querySelector(`span[data-gif-id="${gifId}"]`);
-  
+
   if (favorites.includes(gifId)) {
     removeFavorite(gifId);
-    heartSpan.classList.remove('active')
+    heartSpan.classList.remove('active');
     heartSpan.innerHTML = EMPTY_HEART;
   } else {
     addFavorite(gifId);
@@ -106,24 +107,14 @@ export const toggleFavoriteStatus = (gifId) => {
   }
 };
 
-// function renderSearchResults(gifsArr, searchTerm) {
-//   const gifs = gifsArr.slice(0, GIFS_PER_LINE).map(simpleView).join('\n');
-
-//   document.querySelector(CONTAINER).innerHTML = searchView(gifs, searchTerm);
-// }
-
-// const renderAbout = () => {
-//   document.querySelector(CONTAINER).innerHTML = toAboutView();
-// };
-
 window.gifLoading = false;
 
-export async function renderSearchItems (searchTerm, offset = 0) {
+export async function renderSearchItems(searchTerm, offset = 0) {
 
-  offset === 0 
-  ? document.querySelector(CONTAINER)
-    .innerHTML = `<h1><span id="${SEARCH_RESULTS_TOTAL}"></span> results for "${window.searchTerm}"<h1>` 
-  : document.querySelector(CONTAINER).innerHTML
+  offset === 0 ?
+    document.querySelector(CONTAINER)
+      .innerHTML = `<h1><span id="${SEARCH_RESULTS_TOTAL}"></span> results for "${window.searchTerm}"<h1>` :
+    document.querySelector(CONTAINER).innerHTML;
 
   if (!window.gifLoading) {
 
@@ -144,12 +135,6 @@ export async function renderSearchItems (searchTerm, offset = 0) {
   }
 }
 
-// export const renderFavourites = (data) => {
-//   const gifs = data.map((gif) => simpleViewFav(gif)).join('\n');
-
-//   if (gifs.length === 0) {
-//     document.querySelector(CONTAINER).innerHTML = favouritesEmptyView();
-//   } else {
-//     document.querySelector(CONTAINER).innerHTML = favouritesView(gifs);
-//   }
-// };
+const renderAbout = () => {
+  document.querySelector(CONTAINER).innerHTML = toAboutView();
+};

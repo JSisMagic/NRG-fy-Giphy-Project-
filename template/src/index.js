@@ -3,8 +3,6 @@ import {
   HOME,
   FULL_HEART,
   EMPTY_HEART,
-  FAVOURITES,
-  CONTAINER,
   SEARCH_RESULTS_TOTAL,
   DETAILS,
 } from './components/constants.js';
@@ -29,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const id = event.target.getAttribute('data-gif');
       await loadPage(DETAILS, id);
     }
-    
+
   });
 
   window.addEventListener('popstate', async (event) => {
@@ -48,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     .addEventListener('input', async (event) => {
       window.searchTerm = event.target.value;
       window.offset = 0;
-      
+
       await renderSearchItems(window.searchTerm, window.offset);
     });
 
@@ -73,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       } else {
         alert('Cannot upload empty file!');
       }
-  });
+    });
 
 
   await loadPage(HOME);
