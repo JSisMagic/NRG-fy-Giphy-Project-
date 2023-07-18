@@ -9,8 +9,9 @@ import {
   FULL_HEART,
   SEARCH_RESULTS_TOTAL,
   DETAILS,
+  UPLOADED,
 } from './constants.js';
-import { getTrendingGifs, getSearchGifs, loadFavorites, getGifById, getRandomGif } from './data.js';
+import { getTrendingGifs, getSearchGifs, loadFavorites, getGifById, loadUploaded, getRandomGif } from './data.js';
 import { simpleView } from './views/simple-view.js';
 import { homeView } from './views/home-view.js';
 import {
@@ -21,6 +22,7 @@ import { searchView } from './views/search-view.js';
 import { toAboutView } from './views/about-view.js';
 import { getFavorites, addFavorite, removeFavorite } from './local-storage.js';
 import { gifDetailedView } from './views/gif-detailed-view.js';
+import { uploadedEmptyView, uploadedView } from './views/uploaded-view.js';
 
 /**
  * Loads and renders content for the specified page based on the given page identifier and optional GIF ID.
@@ -43,6 +45,7 @@ export const loadPage = async (page = '', id) => {
 
   case FAVOURITES:
     setActiveNav(FAVOURITES);
+
     const loadedGifs = await loadFavorites();
     const gifs = loadedGifs.map((element) => element.value);
 
@@ -52,6 +55,12 @@ export const loadPage = async (page = '', id) => {
       const randomGif = await getRandomGif();
       return renderFavourites('', randomGif);
     }
+
+  case UPLOADED:
+    setActiveNav(UPLOADED);
+    const uploadedGifs = await loadUploaded();
+    console.log(uploadedGifs);
+    return renderUploaded(uploadedGifs);
 
   case ABOUT:
     setActiveNav(ABOUT);
@@ -75,7 +84,7 @@ export const loadPage = async (page = '', id) => {
  * @return {void}
  */
 function setActiveNav(page) {
-  const navs = document.querySelectorAll('a.nav-link');
+  const navs = document.querySelectorAll('.nav-link');
 
   Array.from(navs).forEach((element) =>
     element.getAttribute('data-page') === page ?
@@ -126,6 +135,16 @@ function renderFavourites(gifs, randomGif) {
   } else {
     const randomGifToRender = simpleView(randomGif);
     document.querySelector(CONTAINER).innerHTML = favouritesEmptyView(randomGifToRender);
+  }
+}
+
+function renderUploaded(gifs) {
+  const gifsToRender = gifs.map(simpleView).join('\n');
+  console.log(gifs);
+  if (gifsToRender.length > 0) {
+    document.querySelector(CONTAINER).innerHTML = uploadedView(gifsToRender);
+  } else {
+    document.querySelector(CONTAINER).innerHTML = uploadedEmptyView(gifsToRender);
   }
 }
 

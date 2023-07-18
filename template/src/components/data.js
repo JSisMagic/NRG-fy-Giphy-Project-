@@ -1,5 +1,5 @@
 import { KEY_RADO, SEARCH_LIMIT, KEY_GERGANA, KEY_NIA } from './constants.js';
-import { getFavorites } from './local-storage.js';
+import { addUploaded, getFavorites, getUploaded } from './local-storage.js';
 
 /**
  * Retrieves a GIF by its ID from the Giphy API.
@@ -21,6 +21,17 @@ export const getGifById = async (gifId = '') => {
     console.error(e);
   }
 };
+
+export const getGifsByIds = async ids => {
+  try {
+    const getByIdsURL = `https://api.giphy.com/v1/gifs?api_key=${KEY_RADO}&ids=${ids.join('%2C')}`;
+    const { data } = await fetch(getByIdsURL).then(res => res.json());
+    return data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 
 /**
  * Retrieves a list of trending GIFs from the Giphy API.
@@ -104,6 +115,16 @@ export const getRandomGif = async () => {
   }
 };
 
+export const loadUploaded = async () => {
+  try {
+    const uploaded = getUploaded();
+    const data = (uploaded.length !== 0) ? await getGifsByIds(uploaded) : null;
+    return data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 /**
  * Uploads a GIF file to Giphy using the Giphy API.
  *
@@ -112,18 +133,14 @@ export const getRandomGif = async () => {
  * @throws {Error} If there is an error during the API call or file upload process.
  */
 export const gifUpload = async () => {
-  try {
-    const apiKey = KEY_NIA;
-    const files = document.getElementById('browse-button').files;
-    const file = files[0];
-    const form = new FormData();
-    form.append('file', file);
-    await fetch(`http://upload.giphy.com/v1/gifs?api_key=${apiKey}`, {
-      method: 'POST',
-      body: form,
-    });
-  } catch (e) {
-    console.error(e);
-    throw new Error('Error uploading GIF:', e);
-  }
+  const apiKey = KEY_NIA;
+  const files = document.getElementById('browse-button').files;
+  const file = files[0];
+  const form = new FormData();
+  form.append('file', file);
+  const response = await fetch(`http://upload.giphy.com/v1/gifs?api_key=${apiKey}`, {
+    method: 'POST',
+    body: form,
+  }).then(resp => resp.json());
+  addUploaded(response.data.id);
 };
