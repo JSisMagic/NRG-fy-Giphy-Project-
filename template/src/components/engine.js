@@ -171,6 +171,10 @@ export const toggleFavoriteStatus = (gifId) => {
     addFavorite(gifId);
     heartSpan.classList.add('active');
     heartSpan.innerHTML = FULL_HEART;
+    
+    if (document.getElementById('favourites-link').classList.contains('active')) {
+      loadPage(FAVOURITES);
+    }
   }
 };
 
