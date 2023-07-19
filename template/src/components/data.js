@@ -1,156 +1,106 @@
-import { KEY_RADO, SEARCH_LIMIT, KEY_GERGANA, KEY_NIA, UPLOADED } from './constants.js';
+import {
+  KEY_RADO,
+  SEARCH_LIMIT,
+  KEY_GERGANA,
+  KEY_NIA,
+  UPLOADED,
+} from './constants.js';
 import { loadPage } from './engine.js';
 import { addUploaded, getFavorites, getUploaded } from './local-storage.js';
 
-/**
- * Retrieves a GIF by its ID from the Giphy API.
- *
- * @async
- * @function
- * @param {string} gifId - The ID of the GIF to fetch from the Giphy API.
- * @return {Promise<Object>} A Promise that resolves to the GIF data as an object from the Giphy API.
- * @throws {Error} If there is an error during the API call or JSON parsing.
- */
 export const getGifById = async (gifId = '') => {
   try {
-    const url = `https://api.giphy.com/v1/gifs/${gifId}?api_key=${KEY_GERGANA}`;
-    const result = await fetch(url);
-    const resultObject = await result.json();
+    const url = `https://api.giphy.com/v1/gifs/${gifId}?api_key=${KEY_GERGANA}&rating=g`;
+    const response = await fetch(url);
+    const result = await response.json();
 
-    return resultObject.data;
-  } catch (e) {
-    console.error(e);
+    return result.data;
+  } catch (error) {
+    console.error(error);
   }
 };
 
-/**
- * Retrieves GIF data from the Giphy API based on the given GIF IDs.
- *
- * @async
- * @function
- * @param {Array<string>} ids - An array of GIF IDs for which to retrieve the GIF data.
- * @return {Promise<Array<Object>|undefined>} A Promise that resolves to an array of GIF data objects representing the GIFs with the provided IDs.
- * If an error occurs during the API call, it returns undefined.
- * @throws {Error} If there is an error while fetching the GIF data.
- */
-export const getGifsByIds = async ids => {
+export const getGifsByIds = async (ids) => {
   try {
     const getByIdsURL = `https://api.giphy.com/v1/gifs?api_key=${KEY_RADO}&ids=${ids.join('%2C')}`;
-    const { data } = await fetch(getByIdsURL).then(res => res.json());
+    const response = await fetch(getByIdsURL);
+    const { data } = await response.json();
     return data;
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 };
 
-/**
- * Retrieves a list of trending GIFs from the Giphy API.
- *
- * @async
- * @function
- * @return {Promise<Array<Object>>} A Promise that resolves to an array of GIF data objects from the Giphy API.
- * @throws {Error} If there is an error during the API call or JSON parsing.
- */
 export const getTrendingGifs = async () => {
   try {
     const url = `https://api.giphy.com/v1/gifs/trending?api_key=${KEY_RADO}&limit=${SEARCH_LIMIT}`;
     const response = await fetch(url);
     const data = await response.json();
     const gifsArr = data.data;
-
     return gifsArr;
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 };
 
-/**
- * Retrieves a list of GIFs from the Giphy API based on the provided search term and offset.
- *
- * @async
- * @function
- * @param {string} searchTerm - The search term used to find GIFs in the Giphy API.
- * @param {number} offset - The offset used for pagination, specifying the starting index of the search results.
- * @return {Promise<Object>} A Promise that resolves to an object containing search results from the Giphy API.
- * @throws {Error} If there is an error during the API call or JSON parsing.
- */
-export const getSearchGifs = async (searchTerm = '', offset = 0) => {
+export const getCategories = async () => {
   try {
-    const url = `https://api.giphy.com/v1/gifs/search?api_key=8sqJpEYE537qoAIdMmET7e54DABNO8vP&q=${searchTerm}&limit=${SEARCH_LIMIT}&offset=${offset}&rating=g`;
-    const results = await fetch(url);
-    const resultsObject = await results.json();
-
-    return resultsObject;
-  } catch (e) {
-    console.error(e);
+    const url = `https://api.giphy.com/v1/gifs/categories?api_key=${KEY_GERGANA}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    const categories = data.data;
+    return categories;
+  } catch (error) {
+    console.error(error);
   }
 };
 
-/**
- * Loads the user's favorite GIFs by retrieving their data from the Giphy API.
- *
- * @async
- * @function
- * @return {Promise<Array<PromiseSettledResult<Object>>>} A Promise that resolves to an array of PromiseSettledResult objects.
- * @throws {Error} If there is an error while retrieving the favorite GIF IDs or when fetching individual GIF data.
- */
+export const getSearchGifs = async (searchTerm = '', category = '', offset = 0) => {
+  try {
+    let url = `https://api.giphy.com/v1/gifs/search?api_key=${KEY_RADO}&q=${searchTerm}&limit=${SEARCH_LIMIT}&offset=${offset}&rating=g`;
+    if (category) {
+      url += `&category=${category}`;
+    }
+    const response = await fetch(url);
+    const resultsObject = await response.json();
+    return resultsObject;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const loadFavorites = async () => {
   try {
     const gifIds = getFavorites();
     return await Promise.allSettled(
-      gifIds.map(async (id) => await getGifById(id)),
+      gifIds.map(async (id) => await getGifById(id))
     );
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 };
 
-/**
- * Retrieves a random GIF from the Giphy API.
- *
- * @async
- * @function
- * @return {Promise<Object>} A Promise that resolves to an object containing the random GIF data from the Giphy API.
- * @throws {Error} If there is an error during the API call or JSON parsing.
- */
 export const getRandomGif = async () => {
   try {
     const url = `https://api.giphy.com/v1/gifs/random?api_key=${KEY_NIA}`;
-    const results = await fetch(url);
-    const resultsObject = await results.json();
-
+    const response = await fetch(url);
+    const resultsObject = await response.json();
     return resultsObject.data;
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 };
 
-/**
- * Loads the user-uploaded GIFs by retrieving their data from the Giphy API based on the uploaded GIF IDs.
- *
- * @async
- * @function
- * @return {Promise<Array<Object>|null>} A Promise that resolves to an array of GIF data objects representing the user-uploaded GIFs.
- * If there are no uploaded GIFs or an error occurs during the API call, it returns null.
- * @throws {Error} If there is an error while retrieving the uploaded GIF data.
- */
 export const loadUploaded = async () => {
   try {
     const uploaded = getUploaded();
-    const data = (uploaded.length !== 0) ? await getGifsByIds(uploaded) : null;
+    const data = uploaded.length !== 0 ? await getGifsByIds(uploaded) : null;
     return data;
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 };
 
-/**
- * Uploads a GIF file to Giphy using the Giphy API.
- *
- * @async
- * @function
- * @throws {Error} If there is an error during the API call or file upload process.
- */
 export const gifUpload = async () => {
   const apiKey = KEY_NIA;
   const files = document.getElementById('browse-button').files;
@@ -158,15 +108,19 @@ export const gifUpload = async () => {
   const form = new FormData();
   form.append('file', file);
 
-  const response = await fetch(`http://upload.giphy.com/v1/gifs?api_key=${apiKey}`, {
-    method: 'POST',
-    body: form,
-  }).then(resp => resp.json());
+  try {
+    const response = await fetch(`https://upload.giphy.com/v1/gifs?api_key=${apiKey}`, {
+      method: 'POST',
+      body: form,
+    });
+    const responseData = await response.json();
+    addUploaded(responseData.data.id);
 
-  addUploaded(response.data.id);
-
-  const confirmAlert = confirm('GIF uploaded successfully!\nSee your uploads?');
-  if (confirmAlert) {
-    loadPage(UPLOADED);
+    const confirmAlert = confirm('GIF uploaded successfully!\nSee your uploads?');
+    if (confirmAlert) {
+      await loadPage(UPLOADED);
+    }
+  } catch (error) {
+    console.error(error);
   }
 };

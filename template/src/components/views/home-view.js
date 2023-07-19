@@ -4,5 +4,6 @@ export const homeView = (gifs) => `
     <div class="content" style="display: flex; flex-wrap: nowrap; overflow-x: auto;">
       ${gifs}
     </div>
+    <div id="categories-container"></div>
   </div>
 `;
