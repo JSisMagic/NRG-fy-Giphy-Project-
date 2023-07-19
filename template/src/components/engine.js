@@ -116,15 +116,26 @@ function renderHome(trendingArr, categoryNames, categoryGifs) {
   categoryLines.forEach((categoryLine, index) => document.querySelector(CONTAINER).innerHTML += homeView(categoryLine, categoryNames[index]))
 }
 
+  // function renderGifDetails(gif) {
+  //   document.querySelector(CONTAINER).innerHTML = gifDetailedView(gif);
+  // }
+  
 /**
- * Renders the GIF details view using the provided GIF data.
- *
- * @function
- * @param {Object} gif - An object containing the details of the GIF to be displayed.
- * @return {void}
- */
+  * Renders the GIF details view using the provided GIF data.
+  *
+  * @function
+  * @param {Object} gif - An object containing the details of the GIF to be displayed.
+  * @return {void}
+  */
 function renderGifDetails(gif) {
-  document.querySelector(CONTAINER).innerHTML = gifDetailedView(gif);
+  document.getElementById("myModal").innerHTML = gifDetailedView(gif);
+
+  const modal = document.getElementById("myModal");
+
+  modal.style.display = "block";
+
+  // const modalContent = document.getElementById("modal-content");
+  modal.style.paddingTop = window.scrollY;
 }
 
 /**

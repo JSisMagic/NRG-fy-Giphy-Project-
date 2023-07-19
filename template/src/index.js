@@ -74,10 +74,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   document
     .querySelector('input#search')
     .addEventListener('keypress', async (event) => {
-      if(event.key === 'Enter') {
+      if (event.key === 'Enter') {
         window.searchTerm = event.target.value;
         window.offset = 0;
-  
+
         await renderSearchItems(window.searchTerm, window.offset);
       }
     });
@@ -117,6 +117,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
 
+  document.addEventListener("click", (event) => {
+    const modal = document.getElementById("myModal");
+
+    modal.style.display = "none";
+  });
 
   await loadPage(HOME);
 });
