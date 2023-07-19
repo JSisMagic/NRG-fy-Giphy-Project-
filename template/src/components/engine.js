@@ -20,7 +20,7 @@ import {
 } from './views/favourites-view.js';
 import { searchView } from './views/search-view.js';
 import { toAboutView } from './views/about-view.js';
-import { getFavorites, addFavorite, removeFavorite } from './local-storage.js';
+import { getFavorites, manageFavorite } from './local-storage.js';
 import { gifDetailedView } from './views/gif-detailed-view.js';
 import { uploadedEmptyView, uploadedView } from './views/uploaded-view.js';
 
@@ -148,7 +148,7 @@ function renderFavourites(gifs, randomGif) {
  */
 function renderUploaded(gifs) {
   const gifsToRender = gifs.map(simpleView).join('\n');
-  
+
   if (gifsToRender.length > 0) {
     document.querySelector(CONTAINER).innerHTML = uploadedView(gifsToRender);
   } else {
@@ -168,7 +168,7 @@ export const toggleFavoriteStatus = (gifId) => {
   const heartSpan = document.querySelector(`span[data-gif-id="${gifId}"]`);
 
   if (favorites.includes(gifId)) {
-    removeFavorite(gifId);
+    manageFavorite.removeFavorite(gifId);
     heartSpan.classList.remove('active');
     heartSpan.innerHTML = EMPTY_HEART;
 
@@ -176,7 +176,7 @@ export const toggleFavoriteStatus = (gifId) => {
       loadPage(FAVOURITES);
     }
   } else {
-    addFavorite(gifId);
+    manageFavorite.addFavorite(gifId);
     heartSpan.classList.add('active');
     heartSpan.innerHTML = FULL_HEART;
 
