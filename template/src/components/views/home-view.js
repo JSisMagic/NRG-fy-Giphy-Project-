@@ -1,9 +1,8 @@
-export const homeView = (gifs) => `
+export const homeView = (gifs, name) => `
   <div id="home">
-    <h2>Trending</h2>
+    <h2>${name}</h2>
     <div class="content" style="display: flex; flex-wrap: nowrap; overflow-x: auto;">
       ${gifs}
     </div>
-    <div id="categories-container"></div>
   </div>
 `;

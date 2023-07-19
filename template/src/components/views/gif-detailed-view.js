@@ -3,7 +3,7 @@ export const gifDetailedView = (gif) => `
     <div class="image-container">
       <img src="${gif.images.fixed_width.url}" alt="${
   gif.title
-}" style="padding-top: 20px; width: 550px; height: 400px;">
+}" style="padding-top: 20px; width: 350px; height: auto;">
     </div>
     <div class="description-container">
       <ul>
