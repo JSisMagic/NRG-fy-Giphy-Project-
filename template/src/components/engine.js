@@ -128,14 +128,15 @@ function renderHome(trendingArr, categoryNames, categoryGifs) {
   * @return {void}
   */
 function renderGifDetails(gif) {
-  document.getElementById("myModal").innerHTML = gifDetailedView(gif);
+  const modalContent = document.getElementById("modal-content");
+  modalContent.innerHTML = gifDetailedView(gif);
 
   const modal = document.getElementById("myModal");
 
   modal.style.display = "block";
 
   // const modalContent = document.getElementById("modal-content");
-  modal.style.paddingTop = window.scrollY;
+  modalContent.style.paddingTop = window.scrollY;
 }
 
 /**
