@@ -1,34 +1,3 @@
-.movie-title {
-  color: rgb(187, 135, 255);
-  margin: 30px;
-}
-
-.movie-detailed-container {
-  margin: 30px;
-  background-color: rgb(14, 14, 16);
-  border: 1px solid rgb(82, 62, 83);
-  display: flex;
-}
-
-.movie-detailed-container img {
-  margin: 40px 10px 40px 40px;
-  width: 330px;
-  float: left;
-}
-
-.movie-info-container {
-  clear: right;
-  margin: 20px 20px 20px 10px;
-  border-left: 1px solid rgb(82, 62, 83);
-  padding: 60px 20px;
-  font-size: 23px;
-}
-
-.movie-info-container div {
-  padding: 15px;
-  color: rgb(208, 208, 208);
-}
-
 .gif-simple {
   display: block;
   position: relative;
@@ -46,94 +15,9 @@
   border-radius: 6px;
 }
 
-#movie-simple h2 {
-  font-size: var(--title-font-size);
-  white-space: pre;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-#movies .content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: justify;
-}
-
-.headline {
-  color: #af7eed;
-  font-size: large;
-}
-
-/* #movie-simple>span {
-  width: 200px;
-  height: 400px;
-}
-
-#movie-simple img {
-  display: flex;
-} */
-
-#movie-simple h3 {
-  color: white;
-}
-
-.single-category {
-  background-color: rgb(25, 25, 25);
-  border-radius: 6px;
-  box-shadow: 5px 5px 5px #af7eed;
-  width: 200px;
-  display: inline-block;
-  text-align: center;
-  align-items: center;
-  text-align: center;
-  border: solid 1px white;
-  justify-content: space-around;
-  margin: 20px;
-}
-
-.h1style {
-  color: rgb(187, 135, 255);
-}
-
-.movies-count {
-  color: white;
-  font-size: 20px;
-}
-
-#movies h1 {
-  color: rgb(187, 135, 255);
-  text-align: center;
-}
-
 a {
   text-decoration: none;
   color: rgb(187, 135, 255);
-}
-
-.btn {
-  background-color: rgb(25, 25, 25);
-  color: rgb(187, 135, 255);
-  border-radius: 10px;
-  height: auto;
-  margin-bottom: 14px;
-  height: 30px;
-  width: 110px;
-}
-
-.btn:hover {
-  border-color: rgb(187, 135, 255);
-  cursor: pointer;
-}
-
-.btn:active {
-  background-color: rgb(187, 135, 255);
-  color: white;
-}
-
-#categories {
-  align-items: auto;
-  text-align: center;
-  justify-content: center;
 }
 
 #home {
@@ -144,23 +28,9 @@ a {
   justify-content: center;
 }
 
-.bullet {
-  padding-left: 0;
-  margin: auto;
-  padding: 10px;
-  width: 300px;
-  align-items: auto;
-  text-align: center;
-  justify-content: center;
-}
-
 li {
   list-style-position: inside;
   text-align: left;
-}
-
-#movie-simple > h2 {
-  color: rgb(187, 135, 255);
 }
 
 #giphy-logo {

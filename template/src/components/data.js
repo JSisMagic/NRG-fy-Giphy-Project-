@@ -157,7 +157,7 @@ export const gifUpload = async () => {
   const file = files[0];
   const form = new FormData();
   form.append('file', file);
-  
+
   const response = await fetch(`http://upload.giphy.com/v1/gifs?api_key=${apiKey}`, {
     method: 'POST',
     body: form,
