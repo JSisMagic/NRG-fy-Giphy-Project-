@@ -117,7 +117,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
 
-  document.addEventListener("click", (event) => {
+  /**
+ * Event listener function that listens for a 'click' event on the modal element.
+ *
+ * @function
+ * @returns {void}
+ */
+  document.addEventListener("click", () => {
     const modal = document.getElementById("myModal");
 
     modal.style.display = "none";

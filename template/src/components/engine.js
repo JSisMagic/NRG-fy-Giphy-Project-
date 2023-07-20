@@ -36,48 +36,48 @@ import { uploadedEmptyView, uploadedView } from './views/uploaded-view.js';
  */
 export const loadPage = async (page = '', id) => {
   switch (page) {
-  case HOME:
-    setActiveNav(HOME);
+    case HOME:
+      setActiveNav(HOME);
 
-    const trendingArr = await getTrendingGifs();
-    const categoriesArr = await getCategories();
-    const categoryNames = categoriesArr.map(category => category.name);
-    const categoryGifsPromises = await Promise.allSettled(categoryNames.map(async (name) => await getSearchGifs(name)));
-    const categoryGifs = categoryGifsPromises.map((element) => element.value.data);
+      const trendingArr = await getTrendingGifs();
+      const categoriesArr = await getCategories();
+      const categoryNames = categoriesArr.map(category => category.name);
+      const categoryGifsPromises = await Promise.allSettled(categoryNames.map(async (name) => await getSearchGifs(name)));
+      const categoryGifs = categoryGifsPromises.map((element) => element.value.data);
 
-    return renderHome(trendingArr, categoryNames, categoryGifs);
+      return renderHome(trendingArr, categoryNames, categoryGifs);
 
-  case FAVOURITES:
-    setActiveNav(FAVOURITES);
+    case FAVOURITES:
+      setActiveNav(FAVOURITES);
 
-    const loadedGifs = await loadFavorites();
-    const gifs = loadedGifs.map((element) => element.value);
+      const loadedGifs = await loadFavorites();
+      const gifs = loadedGifs.map((element) => element.value);
 
-    if (gifs.length > 0) {
-      return renderFavourites(gifs);
-    } else {
-      const randomGif = await getRandomGif();
-      return renderFavourites('', randomGif);
-    }
+      if (gifs.length > 0) {
+        return renderFavourites(gifs);
+      } else {
+        const randomGif = await getRandomGif();
+        return renderFavourites('', randomGif);
+      }
 
-  case UPLOADED:
-    setActiveNav(UPLOADED);
-    const uploadedGifs = await loadUploaded();
+    case UPLOADED:
+      setActiveNav(UPLOADED);
+      const uploadedGifs = await loadUploaded();
 
-    return renderUploaded(uploadedGifs);
+      return renderUploaded(uploadedGifs);
 
-  case ABOUT:
-    setActiveNav(ABOUT);
+    case ABOUT:
+      setActiveNav(ABOUT);
 
-    return renderAbout();
+      return renderAbout();
 
-  case DETAILS:
-    const gif = await getGifById(id);
+    case DETAILS:
+      const gif = await getGifById(id);
 
-    return renderGifDetails(gif);
+      return renderGifDetails(gif);
 
-  default:
-    return null;
+    default:
+      return null;
   }
 };
 
@@ -109,17 +109,17 @@ function setActiveNav(page) {
  */
 function renderHome(trendingArr, categoryNames, categoryGifs) {
   const gifs = trendingArr.slice(0, GIFS_PER_LINE).map(simpleView).join('\n');
-  
+
   document.querySelector(CONTAINER).innerHTML = homeView(gifs, 'trending');
 
   const categoryLines = categoryGifs.map(categoryGifLine => categoryGifLine.map(simpleView).join('\n'))
   categoryLines.forEach((categoryLine, index) => document.querySelector(CONTAINER).innerHTML += homeView(categoryLine, categoryNames[index]))
 }
 
-  // function renderGifDetails(gif) {
-  //   document.querySelector(CONTAINER).innerHTML = gifDetailedView(gif);
-  // }
-  
+// function renderGifDetails(gif) {
+//   document.querySelector(CONTAINER).innerHTML = gifDetailedView(gif);
+// }
+
 /**
   * Renders the GIF details view using the provided GIF data.
   *
@@ -136,7 +136,7 @@ function renderGifDetails(gif) {
   modal.style.display = "block";
 
   // const modalContent = document.getElementById("modal-content");
-  modalContent.style.paddingTop = window.scrollY;
+  // modalContent.style.paddingTop = window.scrollY;
 }
 
 /**
