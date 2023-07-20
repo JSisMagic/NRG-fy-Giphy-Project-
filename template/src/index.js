@@ -123,10 +123,11 @@ document.addEventListener('DOMContentLoaded', async () => {
  * @function
  * @returns {void}
  */
-  document.addEventListener('click', () => {
+  document.addEventListener('click', (e) => {
     const modal = document.getElementById('myModal');
-
-    modal.style.display = 'none';
+    if (!(e.target.classList.contains('image-display'))) {
+      modal.style.display = 'none';
+    }
   });
 
   await loadPage(HOME);

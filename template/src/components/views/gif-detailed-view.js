@@ -1,9 +1,7 @@
-export const gifDetailedView = (gif) => `
+export const gifDetailedView = (gif, simpleViewGif) => `
   <div class="details-container">
     <div class="image-container">
-      <img src="${gif.images.fixed_width.url}" alt="${
-  gif.title
-}" style="padding-top: 20px; width: 350px; height: auto;">
+      ${simpleViewGif}
     </div>
     <div class="description-container">
       <ul>

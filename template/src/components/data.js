@@ -76,7 +76,7 @@ export const getTrendingGifs = async () => {
  */
 export const getSearchGifs = async (searchTerm = '', offset = 0) => {
   try {
-    const url = `https://api.giphy.com/v1/gifs/search?api_key=8sqJpEYE537qoAIdMmET7e54DABNO8vP&q=${searchTerm}&limit=${SEARCH_LIMIT}&offset=${offset}&rating=g`;
+    const url = `https://api.giphy.com/v1/gifs/search?api_key=${KEY_RADO}&q=${searchTerm}&limit=${SEARCH_LIMIT}&offset=${offset}&rating=g`;
     const results = await fetch(url);
     const resultsObject = await results.json();
 
