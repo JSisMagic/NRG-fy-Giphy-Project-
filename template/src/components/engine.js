@@ -190,7 +190,7 @@ export const toggleFavoriteStatus = (gifId) => {
     if (document.getElementById('favourites-link').classList.contains('active')) {
       loadPage(FAVOURITES);
     }
-    if (document.getElementById('myModal').style.display != 'none') {
+    if (document.getElementById('myModal').style.display !== 'none') {
       loadPage(DETAILS, gifId);
     }
 
@@ -202,7 +202,7 @@ export const toggleFavoriteStatus = (gifId) => {
     if (document.getElementById('favourites-link').classList.contains('active')) {
       loadPage(FAVOURITES);
     }
-    if (document.getElementById('myModal').style.display != 'none') {
+    if (document.getElementById('myModal').style.display !== 'none') {
       loadPage(DETAILS, gifId);
     }
   }
