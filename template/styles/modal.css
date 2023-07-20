@@ -10,20 +10,21 @@
     height: 100%; /* Full height */
     overflow-y: initial; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
   }
   
   /* Modal Content */
   #modal-content {
-    position: absolute;
+    display: block;
+    position: relative;
     overflow-y: initial;
-    margin-left: 50%;
-    margin-right: 50%;
-    background-color: #c08989;
+    background-color: #000000;
+    box-shadow: 0px 0px 10px rgb(255, 0, 204);
     margin: auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    width: min-content;
   }
   
   /* The Close Button */
