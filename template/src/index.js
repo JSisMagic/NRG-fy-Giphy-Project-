@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (
       window.scrollY + window.innerHeight >=
       document.documentElement.scrollHeight &&
-      document.getElementById('search-results-total')
+      document.getElementById(SEARCH_RESULTS_TOTAL)
     ) {
       renderSearchItems(window.searchTerm, window.offset);
       window.gifLoading = true;
@@ -121,19 +121,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Cannot upload empty file!');
       }
     });
-
-  /**
- * Event listener function that listens for a 'click' event on the modal element.
- *
- * @function
- * @returns {void}
- */
-  // document.addEventListener('click', (e) => {
-  //   const modal = document.getElementById('myModal');
-  //   if (e.target.classList.contains('modal')) {
-  //     modal.style.display = 'none';
-  //   }
-  // });
 
   await loadPage(HOME);
 });

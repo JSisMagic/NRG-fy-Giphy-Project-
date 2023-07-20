@@ -133,8 +133,6 @@ function renderGifDetails(gif) {
 
   modal.style.display = 'block';
 
-  // const modalContent = document.getElementById("modal-content");
-  // modalContent.style.paddingTop = window.scrollY;
 }
 
 /**
