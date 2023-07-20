@@ -117,10 +117,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
 
-  document.addEventListener("click", (event) => {
-    const modal = document.getElementById("myModal");
+  document.addEventListener('click', (event) => {
+    const modal = document.getElementById('myModal');
 
-    modal.style.display = "none";
+    modal.style.display = 'none';
   });
 
   await loadPage(HOME);

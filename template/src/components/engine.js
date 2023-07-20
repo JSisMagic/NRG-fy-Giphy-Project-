@@ -101,25 +101,26 @@ function setActiveNav(page) {
 // rendering
 
 /**
- * Renders the home page with the provided trending GIFs data.
+ * Renders the home page with trending gifs and categorized gifs.
  *
- * @function
- * @param {Array<Object>} trendingArr - An array of trending GIF data objects to be displayed on the home page.
- * @return {void}
+ * @param {Array} trendingArr - An array containing trending gifs.
+ * @param {Array} categoryNames - An array of strings representing category names.
+ * @param {Array<Array>} categoryGifs - An array of arrays containing gifs categorized by category.
+ * @return {void} This function does not return anything.
  */
 function renderHome(trendingArr, categoryNames, categoryGifs) {
   const gifs = trendingArr.slice(0, GIFS_PER_LINE).map(simpleView).join('\n');
-  
+
   document.querySelector(CONTAINER).innerHTML = homeView(gifs, 'trending');
 
-  const categoryLines = categoryGifs.map(categoryGifLine => categoryGifLine.map(simpleView).join('\n'))
-  categoryLines.forEach((categoryLine, index) => document.querySelector(CONTAINER).innerHTML += homeView(categoryLine, categoryNames[index]))
+  const categoryLines = categoryGifs.map(categoryGifLine => categoryGifLine.map(simpleView).join('\n'));
+  categoryLines.forEach((categoryLine, index) => document.querySelector(CONTAINER).innerHTML += homeView(categoryLine, categoryNames[index]));
 }
 
-  // function renderGifDetails(gif) {
-  //   document.querySelector(CONTAINER).innerHTML = gifDetailedView(gif);
-  // }
-  
+// function renderGifDetails(gif) {
+//   document.querySelector(CONTAINER).innerHTML = gifDetailedView(gif);
+// }
+
 /**
   * Renders the GIF details view using the provided GIF data.
   *
@@ -128,12 +129,12 @@ function renderHome(trendingArr, categoryNames, categoryGifs) {
   * @return {void}
   */
 function renderGifDetails(gif) {
-  const modalContent = document.getElementById("modal-content");
+  const modalContent = document.getElementById('modal-content');
   modalContent.innerHTML = gifDetailedView(gif);
 
-  const modal = document.getElementById("myModal");
+  const modal = document.getElementById('myModal');
 
-  modal.style.display = "block";
+  modal.style.display = 'block';
 
   // const modalContent = document.getElementById("modal-content");
   modalContent.style.paddingTop = window.scrollY;
