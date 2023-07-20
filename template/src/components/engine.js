@@ -190,6 +190,10 @@ export const toggleFavoriteStatus = (gifId) => {
     if (document.getElementById('favourites-link').classList.contains('active')) {
       loadPage(FAVOURITES);
     }
+    if (document.getElementById('myModal').style.display != 'none') {
+      loadPage(DETAILS, gifId);
+    }
+
   } else {
     manageFavorite.addFavorite(gifId);
     heartSpan.classList.add('active');
@@ -197,6 +201,9 @@ export const toggleFavoriteStatus = (gifId) => {
 
     if (document.getElementById('favourites-link').classList.contains('active')) {
       loadPage(FAVOURITES);
+    }
+    if (document.getElementById('myModal').style.display != 'none') {
+      loadPage(DETAILS, gifId);
     }
   }
 };
