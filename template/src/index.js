@@ -37,6 +37,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       await loadPage(DETAILS, id);
     }
 
+    if (event.target.classList.contains('modal')) {
+      const modal = document.getElementById('myModal');
+      modal.style.display = 'none';
+    }
+
   });
 
   /**
@@ -123,12 +128,12 @@ document.addEventListener('DOMContentLoaded', async () => {
  * @function
  * @returns {void}
  */
-  document.addEventListener('click', (e) => {
-    const modal = document.getElementById('myModal');
-    if (!(e.target.classList.contains('image-display'))) {
-      modal.style.display = 'none';
-    }
-  });
+  // document.addEventListener('click', (e) => {
+  //   const modal = document.getElementById('myModal');
+  //   if (e.target.classList.contains('modal')) {
+  //     modal.style.display = 'none';
+  //   }
+  // });
 
   await loadPage(HOME);
 });
