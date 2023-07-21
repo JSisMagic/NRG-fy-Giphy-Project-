@@ -149,9 +149,9 @@ function renderFavourites(gifsObj, randomGif) {
 
     const gifs = gifsObj.map(simpleFixedWidthView);
 
-    const gifs1 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
-    const gifs2 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
-    const gifs3 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
+    const gifs1 = gifs.splice(0, Math.floor(gifs.length / 4)).join('\n');
+    const gifs2 = gifs.splice(0, Math.floor(gifs.length / 3)).join('\n');
+    const gifs3 = gifs.splice(0, Math.floor(gifs.length / 2)).join('\n');
     const gifs4 = gifs.join('\n');
 
     document.querySelector(CONTAINER).innerHTML = favouritesView(gifs1, gifs2, gifs3, gifs4, FAVOURITES);
@@ -175,9 +175,9 @@ function renderUploaded(gifsObj) {
 
     const gifs = gifsObj.map(simpleFixedWidthView);
 
-    const gifs1 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
-    const gifs2 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
-    const gifs3 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
+    const gifs1 = gifs.splice(0, Math.floor(gifs.length / 4)).join('\n');
+    const gifs2 = gifs.splice(0, Math.floor(gifs.length / 3)).join('\n');
+    const gifs3 = gifs.splice(0, Math.floor(gifs.length / 2)).join('\n');
     const gifs4 = gifs.join('\n');
 
     document.querySelector(CONTAINER).innerHTML = favouritesView(gifs1, gifs2, gifs3, gifs4, UPLOADED);
