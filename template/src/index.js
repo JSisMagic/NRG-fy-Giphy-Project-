@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Click event listener function
   document.addEventListener('click', async (event) => {
 
-    event.preventDefault();
 
     if (event.target.classList.contains('nav-link')) {
       await loadPage(event.target.getAttribute('data-page'));
@@ -35,6 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     if (event.target.classList.contains('image-display')) {
+      event.preventDefault();
       const id = event.target.getAttribute('data-gif');
       await loadPage(DETAILS, id);
     }

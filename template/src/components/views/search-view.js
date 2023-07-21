@@ -1,2 +1,3 @@
-export const searchView = (gifs) =>
-  `${gifs}`;
+export const searchView = (gifs) => `
+  ${gifs}
+  `;

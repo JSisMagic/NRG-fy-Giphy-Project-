@@ -1,10 +1,21 @@
 import { EMPTY_HEART } from '../constants.js';
 
-export const favouritesView = (gifs) =>
-  `<div id="favourites">
-    <h2>Favourite GIFs</h2>
-    <div class="gifs-list">
-      ${gifs}
+export const favouritesView = (gifs1, gifs2, gifs3, gifs4, pageId) =>
+  `<div id="${pageId}">
+    <h2>${pageId}:</h2>
+    <div id="column-separator">
+      <div id="column1" class="column">
+      ${gifs1}
+      </div>
+      <div id="column2" class="column">
+      ${gifs2}
+      </div>
+      <div id="column3" class="column">
+      ${gifs3}
+      </div>
+      <div id="column4" class="column">
+      ${gifs4}
+      </div>
     </div>
   </div>`;
 

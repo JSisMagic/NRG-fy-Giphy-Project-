@@ -12,7 +12,7 @@ import {
   UPLOADED,
 } from './constants.js';
 import { getTrendingGifs, getSearchGifs, loadFavorites, getGifById, loadUploaded, getRandomGif, getCategories } from './data.js';
-import { simpleView } from './views/simple-view.js';
+import { simpleFixedWidthView, simpleView } from './views/simple-view.js';
 import { homeView } from './views/home-view.js';
 import {
   favouritesView,
@@ -36,48 +36,48 @@ import { uploadedEmptyView, uploadedView } from './views/uploaded-view.js';
  */
 export const loadPage = async (page = '', id) => {
   switch (page) {
-  case HOME:
-    setActiveNav(HOME);
+    case HOME:
+      setActiveNav(HOME);
 
-    const trendingArr = await getTrendingGifs();
-    const categoriesArr = await getCategories();
-    const categoryNames = categoriesArr.map(category => category.name);
-    const categoryGifsPromises = await Promise.allSettled(categoryNames.map(async (name) => await getSearchGifs(name)));
-    const categoryGifs = categoryGifsPromises.map((element) => element.value.data);
+      const trendingArr = await getTrendingGifs();
+      const categoriesArr = await getCategories();
+      const categoryNames = categoriesArr.map(category => category.name);
+      const categoryGifsPromises = await Promise.allSettled(categoryNames.map(async (name) => await getSearchGifs(name)));
+      const categoryGifs = categoryGifsPromises.map((element) => element.value.data);
 
-    return renderHome(trendingArr, categoryNames, categoryGifs);
+      return renderHome(trendingArr, categoryNames, categoryGifs);
 
-  case FAVOURITES:
-    setActiveNav(FAVOURITES);
+    case FAVOURITES:
+      setActiveNav(FAVOURITES);
 
-    const loadedGifs = await loadFavorites();
-    const gifs = loadedGifs.map((element) => element.value);
+      const loadedGifs = await loadFavorites();
+      const gifs = loadedGifs.map((element) => element.value);
 
-    if (gifs.length > 0) {
-      return renderFavourites(gifs);
-    } else {
-      const randomGif = await getRandomGif();
-      return renderFavourites('', randomGif);
-    }
+      if (gifs.length > 0) {
+        return renderFavourites(gifs);
+      } else {
+        const randomGif = await getRandomGif();
+        return renderFavourites('', randomGif);
+      }
 
-  case UPLOADED:
-    setActiveNav(UPLOADED);
-    const uploadedGifs = await loadUploaded();
+    case UPLOADED:
+      setActiveNav(UPLOADED);
+      const uploadedGifs = await loadUploaded();
 
-    return renderUploaded(uploadedGifs);
+      return renderUploaded(uploadedGifs);
 
-  case ABOUT:
-    setActiveNav(ABOUT);
+    case ABOUT:
+      setActiveNav(ABOUT);
 
-    return renderAbout();
+      return renderAbout();
 
-  case DETAILS:
-    const gif = await getGifById(id);
+    case DETAILS:
+      const gif = await getGifById(id);
 
-    return renderGifDetails(gif);
+      return renderGifDetails(gif);
 
-  default:
-    return null;
+    default:
+      return null;
   }
 };
 
@@ -143,11 +143,19 @@ function renderGifDetails(gif) {
  * @param {Object} randomGif - An object representing a random GIF to display in case the favorites list is empty.
  * @return {void}
  */
-function renderFavourites(gifs, randomGif) {
+function renderFavourites(gifsObj, randomGif) {
 
-  if (gifs.length > 0) {
-    const gifsToRender = gifs.map(simpleView).join('\n');
-    document.querySelector(CONTAINER).innerHTML = favouritesView(gifsToRender);
+  if (gifsObj.length > 0) {
+
+    const gifs = gifsObj.map(simpleFixedWidthView);
+
+    const gifs1 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
+    const gifs2 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
+    const gifs3 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
+    const gifs4 = gifs.join('\n');
+
+    document.querySelector(CONTAINER).innerHTML = favouritesView(gifs1, gifs2, gifs3, gifs4, FAVOURITES);
+
   } else {
     const randomGifToRender = simpleView(randomGif);
     document.querySelector(CONTAINER).innerHTML = favouritesEmptyView(randomGifToRender);
@@ -161,13 +169,21 @@ function renderFavourites(gifs, randomGif) {
  * @param {Array<Object>} gifs - An array of uploaded GIF data objects to be displayed in the uploaded view.
  * @return {void}
  */
-function renderUploaded(gifs) {
-  const gifsToRender = gifs.map(simpleView).join('\n');
+function renderUploaded(gifsObj) {
 
-  if (gifsToRender.length > 0) {
-    document.querySelector(CONTAINER).innerHTML = uploadedView(gifsToRender);
+  if (gifsObj.length > 0) {
+
+    const gifs = gifsObj.map(simpleFixedWidthView);
+
+    const gifs1 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
+    const gifs2 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
+    const gifs3 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
+    const gifs4 = gifs.join('\n');
+
+    document.querySelector(CONTAINER).innerHTML = favouritesView(gifs1, gifs2, gifs3, gifs4, UPLOADED);
+
   } else {
-    document.querySelector(CONTAINER).innerHTML = uploadedEmptyView(gifsToRender);
+    document.querySelector(CONTAINER).innerHTML = uploadedEmptyView();
   }
 }
 
@@ -222,19 +238,41 @@ window.gifLoading = false;
  */
 export async function renderSearchItems(searchTerm, offset = 0) {
 
-  offset === 0 ?
-    document.querySelector(CONTAINER)
-      .innerHTML = `<h2><span id="${SEARCH_RESULTS_TOTAL}"></span> results for "${window.searchTerm}"<h2>` :
-    document.querySelector(CONTAINER).innerHTML;
+  offset === 0
+    ? document.querySelector(CONTAINER)
+        .innerHTML = `
+          <h2><span id="${SEARCH_RESULTS_TOTAL}"></span> results for "${window.searchTerm}"<h2>
+          <div id="column-separator">
+            <div id="column1" class="column">
+            </div>
+            <div id="column2" class="column">
+            </div>
+            <div id="column3" class="column">
+            </div>
+            <div id="column4" class="column">
+            </div>
+          </div>
+        `
+    : document.querySelector(CONTAINER).innerHTML;
 
   if (!window.gifLoading) {
 
     try {
       const gifsObj = await getSearchGifs(searchTerm, offset);
-      const gifs = gifsObj.data.map(simpleView).join('\n');
 
+      const gifs = gifsObj.data.map(simpleFixedWidthView);
+
+      const gifs1 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
+      const gifs2 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
+      const gifs3 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');
+      const gifs4 = gifs.join('\n');
+      
       document.querySelector(`#${SEARCH_RESULTS_TOTAL}`).innerHTML = gifsObj.pagination.total_count;
-      document.querySelector(CONTAINER).innerHTML += searchView(gifs);
+
+      document.querySelector('#column1').innerHTML += searchView(gifs1);
+      document.querySelector('#column2').innerHTML += searchView(gifs2);
+      document.querySelector('#column3').innerHTML += searchView(gifs3);
+      document.querySelector('#column4').innerHTML += searchView(gifs4);
 
       window.offset += SEARCH_LIMIT;
 
