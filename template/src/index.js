@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Click event listener function
   document.addEventListener('click', async (event) => {
 
+    event.preventDefault();
+
     if (event.target.classList.contains('nav-link')) {
       await loadPage(event.target.getAttribute('data-page'));
     }
