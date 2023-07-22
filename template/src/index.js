@@ -1,4 +1,8 @@
-import { loadPage, renderSearchItems } from './components/engine.js';
+import { 
+  loadPage, 
+  renderSearchItems, 
+  setActiveNav 
+} from './components/engine.js';
 import {
   HOME,
   FULL_HEART,
@@ -84,7 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (event.key === 'Enter') {
         window.searchTerm = event.target.value;
         window.offset = 0;
-
+        setActiveNav('');
         await renderSearchItems(window.searchTerm, window.offset);
       }
     });

@@ -88,7 +88,7 @@ export const loadPage = async (page = '', id) => {
  * @param {string} page - The page identifier for which the navigation link should be marked as active.
  * @return {void}
  */
-function setActiveNav(page) {
+export function setActiveNav(page) {
   const navs = document.querySelectorAll('.nav-link');
 
   Array.from(navs).forEach((element) =>
