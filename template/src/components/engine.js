@@ -180,7 +180,7 @@ function renderUploaded(gifsObj) {
     const gifs3 = gifs.splice(0, Math.floor(gifs.length / 2)).join('\n');
     const gifs4 = gifs.join('\n');
 
-    document.querySelector(CONTAINER).innerHTML = favouritesView(gifs1, gifs2, gifs3, gifs4, UPLOADED);
+    document.querySelector(CONTAINER).innerHTML = uploadedView(gifs1, gifs2, gifs3, gifs4, UPLOADED);
 
   } else {
     document.querySelector(CONTAINER).innerHTML = uploadedEmptyView();
@@ -259,7 +259,7 @@ export async function renderSearchItems(searchTerm, offset = 0) {
 
     try {
       const gifsObj = await getSearchGifs(searchTerm, offset);
-
+      
       const gifs = gifsObj.data.map(simpleFixedWidthView);
 
       const gifs1 = gifs.splice(0, Math.floor(SEARCH_LIMIT / 4)).join('\n');

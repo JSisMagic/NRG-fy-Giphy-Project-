@@ -15,7 +15,7 @@ ${renderFavoriteStatus(gif.id)}
   <a href=# class="view-button" data-gif-id="${gif.id}">
     <img 
       class="image-display" 
-      src="${gif.images['480w_still'].url}" 
+      src="${gif.images.fixed_width.url}" 
       alt="${gif.title}" 
       data-gif="${gif.id}" 
       style="width: ${(gif.images['480w_still'].width)/1.5}px; height: ${(gif.images['480w_still'].height)/1.5}px;" 
