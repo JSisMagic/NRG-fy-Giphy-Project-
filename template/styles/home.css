@@ -187,7 +187,3 @@ span.favorite:hover {
   text-overflow: ellipsis;
   padding-bottom: 5px;
 }
-
-#search-results-total {
-  margin-left: 10px;
-}

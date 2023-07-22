@@ -241,17 +241,19 @@ export async function renderSearchItems(searchTerm, offset = 0) {
   offset === 0
     ? document.querySelector(CONTAINER)
         .innerHTML = `
-          <h2><span id="${SEARCH_RESULTS_TOTAL}"></span> results for "${window.searchTerm}"<h2>
-          <div id="column-separator">
-            <div id="column1" class="column">
+          <h2><span id="${SEARCH_RESULTS_TOTAL}"></span> results for "${window.searchTerm}"</h2>
+          <h2>
+            <div id="column-separator">
+              <div id="column1" class="column">
+              </div>
+              <div id="column2" class="column">
+              </div>
+              <div id="column3" class="column">
+              </div>
+              <div id="column4" class="column">
+              </div>
             </div>
-            <div id="column2" class="column">
-            </div>
-            <div id="column3" class="column">
-            </div>
-            <div id="column4" class="column">
-            </div>
-          </div>
+          </h2>
         `
     : document.querySelector(CONTAINER).innerHTML;
 

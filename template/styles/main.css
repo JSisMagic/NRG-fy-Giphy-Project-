@@ -48,3 +48,7 @@ li {
 .description-container {
   color: white;
 }
+
+h2 {
+  padding-left: 10px;
+}
